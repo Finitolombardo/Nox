@@ -13,6 +13,8 @@ Früherkennung von Verzettelung + Kostenkontrolle.
    - `./scripts/verzettelung-alarm.sh 60`
 4. Backup-Alarm prüfen (Silent Success, Noisy Failure)
    - `./scripts/backup-alert-check.sh`
+5. Cash-Score Report (22:00 UTC, Telegram)
+   - `./scripts/cash-score-report.sh`
 
 ## Alarmregel (ROI-Logik)
 Wir nutzen `total_tokens_sum` als API-Kosten-Proxy:

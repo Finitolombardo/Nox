@@ -1,0 +1,878 @@
+{
+  "updatedAt": "2026-02-15T17:27:26.634Z",
+  "createdAt": "2026-02-15T17:27:24.723Z",
+  "name": "Angle Evaluator v2 (Cash Score)",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1104,
+        400
+      ],
+      "id": "de693532-4209-47ca-9739-5b3506bfc379",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        400
+      ],
+      "id": "fde55794-c5b4-447b-beec-1ce2334e4273",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7344c527-e285-45e9-8e3e-038bd1ae8316",
+              "name": "=mutationLogId",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "234bf728-1fd7-47c3-b23d-92783fcc65dc",
+              "name": "pitchVariantId",
+              "value": "={{ $json.property_pitch_variants[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "7a1f217d-5390-49b4-897c-2f4c5e1d5dcd",
+              "name": "batch_id",
+              "value": "={{ $json.property_batch_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        416
+      ],
+      "id": "51a1d401-a64f-4e45-aabf-9d42c6a52427",
+      "name": "Keep Mutation Context"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1152,
+        384
+      ],
+      "id": "04f9ebe5-2161-4daf-996b-bca32d4c75f2",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nreturn items.map((item) => {\n  const j = item.json || {};\n  const ctx = j; // Kontext behalten\n\n  const pitchPage = j.pitchPage || {};\n  const pitchVariant = j.pitchVariant || {};\n\n  const replyTexts = Array.isArray(pitchVariant.replyTexts) ? pitchVariant.replyTexts : [];\n  const positiveReplies = Array.isArray(pitchVariant.positiveReplies) ? pitchVariant.positiveReplies : [];\n\n  const hasReplies = replyTexts.length > 0;\n\n  return {\n    json: {\n      ...ctx, // ✅ ALLES behalten (Badge-ID, whatever du vorher gesetzt hast)\n\n      // IDs\n      mutationLogId: pitchPage.id || ctx.mutationLogId || null,\n      pitchVariantId: pitchVariant.pitchVariantId || ctx.pitchVariantId || null,\n\n      // Stats (aus PitchVariant)\n      pitchVariant, // falls du es später brauchst\n      sends: Number(pitchVariant.property_sends ?? 0),\n      opens: Number(pitchVariant.property_opens ?? 0),\n      clicks: Number(pitchVariant.property_clicks ?? 0),\n      replies: Number(pitchVariant.property_replies ?? 0),\n      open_rate: Number(pitchVariant.property_open_rate ?? 0),\n      reply_rate: Number(pitchVariant.property_reply_rate ?? 0),\n      positive_count: positiveReplies.length,\n\n      // Flags\n      hasReplies,\n      positiveReplies,\n      replyTexts,\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        416
+      ],
+      "id": "ec0d393d-b93b-4331-8f62-bed87ba5542f",
+      "name": "Normalize Merge Output"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "2kVRTrb6OTje6O53",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/2kVRTrb6OTje6O53",
+          "cachedResultName": "Voidra – Reply Classifier (v1)"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "campaign_id": "={{ $('Pitch DB / Campaign ID').item.json.property_campaign_id }}",
+            "mutation_page_id": "={{ $json.id }}",
+            "pitch_variants_id": "={{ $json.pitchVariantId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "campaign_id",
+              "displayName": "campaign_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "mutation_page_id",
+              "displayName": "mutation_page_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "pitch_variants_id",
+              "displayName": "pitch_variants_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        944,
+        480
+      ],
+      "id": "068b1826-51ba-4960-b6d8-174ec06bc7af",
+      "name": "Replies holen"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "get",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.property_pitch_variants[0] }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        416
+      ],
+      "id": "fd270266-40f0-452c-812a-d1c21eff9d40",
+      "name": "Pitch DB / Campaign ID",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bc5a9a5a-bb04-4c14-948f-312631b9ae13",
+      "name": "Schedule Trigger1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        688,
+        480
+      ],
+      "id": "a71498d2-25be-4c14-8b01-b0950a0b11de",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1568,
+        416
+      ],
+      "id": "2c452eca-1f4e-45d2-b332-242a49f9d59d",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "2df09df6-e88e-804f-ad4a-e857721c0ccf",
+          "mode": "list",
+          "cachedResultName": "Mutation History",
+          "cachedResultUrl": "https://www.notion.so/2df09df6e88e804fad4ae857721c0ccf"
+        },
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "IsFinal|checkbox",
+              "condition": "equals"
+            }
+          ]
+        },
+        "options": {
+          "sort": {
+            "sortValue": [
+              {
+                "key": "Eval_Due_At|date",
+                "direction": "ascending"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -912,
+        400
+      ],
+      "id": "ad25d24a-e7f8-406f-9318-815aaf85a6b5",
+      "name": "Mutation History holen",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date();\n\nconst items = $input.all();\nconst due = [];\n\nfor (const it of items) {\n  // ✅ Works with flattened Notion output (your screenshot)\n  const d =\n    it.json.property_eval_due_at?.start\n    || it.json.properties?.Eval_Due_At?.date?.start\n    || it.json.properties?.[\"Eval_Due_At\"]?.date?.start;\n\n  const isFinal =\n    it.json.property_is_final\n    ?? it.json.properties?.IsFinal?.checkbox\n    ?? it.json.properties?.[\"IsFinal\"]?.checkbox\n    ?? false;\n\n  if (isFinal) continue;\n  if (!d) continue;\n\n  const dueAt = new Date(d);\n  if (dueAt <= now) due.push(it);\n}\n\n// IMPORTANT: return array of items\nreturn due;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -672,
+        400
+      ],
+      "id": "b72c4fed-466f-4859-9994-727548ffd28d",
+      "name": "Was ist fällig?"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "get",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.mutationLogId }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1376,
+        448
+      ],
+      "id": "440a0ff9-339a-42b0-96b7-81f89663e349",
+      "name": "Hol Mutation Page",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "2df09df6-e88e-804f-ad4a-e857721c0ccf",
+          "mode": "list",
+          "cachedResultName": "Mutation History",
+          "cachedResultUrl": "https://www.notion.so/2df09df6e88e804fad4ae857721c0ccf"
+        },
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Batch_ID|rich_text",
+              "condition": "equals",
+              "richTextValue": "={{ $json.batch_id }}"
+            }
+          ]
+        },
+        "options": {
+          "sort": {
+            "sortValue": [
+              {
+                "key": "Eval_Due_At|date",
+                "direction": "ascending"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        240
+      ],
+      "id": "312f1e25-0ed0-4ad4-b9b8-75c5d6e98c88",
+      "name": "Mutation History holen1",
+      "executeOnce": true,
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.mutationLogId }}",
+          "mode": "id"
+        },
+        "simple": "={{ true }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Sends|number",
+              "numberValue": "={{ $json.property_sends }}"
+            },
+            {
+              "key": "PositiveCount|number",
+              "numberValue": "={{ $json.property_positive_count }}"
+            },
+            {
+              "key": "NegativeCount|number",
+              "numberValue": "={{ $json.property_negative_count }}"
+            },
+            {
+              "key": "UnsubCount|number",
+              "numberValue": "={{ $json.property_unsub_count }}"
+            },
+            {
+              "key": "OOOCount|number",
+              "numberValue": "={{ $json.property_ooo_count }}"
+            },
+            {
+              "key": "OpenRate|number",
+              "numberValue": "={{ $json.property_open_rate }}"
+            },
+            {
+              "key": "ReplyRate|number",
+              "numberValue": "={{ $json.property_reply_rate }}"
+            },
+            {
+              "key": "Score|number",
+              "numberValue": "={{ $json.property_score }}"
+            },
+            {
+              "key": "Outcome|select",
+              "selectValue": "={{ $json.property_outcome }}"
+            },
+            {
+              "key": "EvaluatedAt|date",
+              "date": "={{ new Date().toISOString() }}"
+            },
+            {
+              "key": "IsFinal|checkbox",
+              "checkboxValue": true
+            },
+            {
+              "key": "Generation|number",
+              "numberValue": "={{ $('Pitch DB / Campaign ID').item.json.property_generation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1952,
+        320
+      ],
+      "id": "d879847e-2aa7-4fab-a2de-ed85239156b7",
+      "name": "Update Mutations Page",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $('Merge1').item.json.pitch_db_id }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "OpenRate|number",
+              "numberValue": "={{ $json.property_open_rate }}"
+            },
+            {
+              "key": "ReplyRate|number",
+              "numberValue": "={{ $json.property_reply_rate }}"
+            },
+            {
+              "key": "PositiveReplyCount|number",
+              "numberValue": "={{ $json.property_positive_count }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        304
+      ],
+      "id": "5e7a5ce0-fba8-4063-8f0f-ca21f70482f5",
+      "name": "Update Pitch DB",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2368,
+        416
+      ],
+      "id": "5c488736-aa14-42b6-b8e3-8ccad42a6969",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawItems = $input.all().map(i => i.json);\n\nconst num = (v) => (v === null || v === undefined || v === '' ? 0 : Number(v)) || 0;\n\n// dedupe by page id\nconst seen = new Set();\nconst items = [];\nfor (const it of rawItems) {\n  const id = it.id || it.pageId || it.property_id;\n  if (id && seen.has(id)) continue;\n  if (id) seen.add(id);\n  items.push(it);\n}\n\nfunction score(m) {\n  // P = Positive-Intent-Rate in % (robust fallback)\n  const sends = Math.max(num(m.property_sends), num(m.sends), 0);\n  const posCount = Math.max(num(m.property_positive_count), num(m.positive_count), 0);\n  const P = sends > 0 ? (posCount / sends) * 100 : 0;\n\n  // R = ReplyRate in %\n  const R = Math.max(num(m.property_reply_rate), num(m.reply_rate), 0);\n\n  // O = OpenRate in %\n  const O = Math.max(num(m.property_open_rate), num(m.open_rate), 0);\n\n  // Cash-Score v2\n  const S = (0.6 * P) + (0.25 * R) + (0.15 * O);\n\n  return {\n    S,\n    P,\n    R,\n    O,\n    sends,\n    posCount,\n  };\n}\n\nconst scored = items.map(m => {\n  const r = score(m);\n  return {\n    ...m,\n    cash_score: Number(r.S.toFixed(4)),\n    positive_rate: Number(r.P.toFixed(4)),\n    reply_rate_eval: Number(r.R.toFixed(4)),\n    open_rate_eval: Number(r.O.toFixed(4)),\n    eval_sends: r.sends,\n    eval_positive_count: r.posCount,\n    eval_score: Number(r.S.toFixed(4)),\n  };\n});\n\nif (scored.length < 2) {\n  return scored.map(m => ({\n    json: {\n      ...m,\n      eval_can_compare: false,\n      eval_outcome: 'Pending',\n      eval_winner_id: null,\n      eval_reason: `Batch incomplete: expected 2 mutations, got ${scored.length}`,\n    }\n  }));\n}\n\nscored.sort((a,b) => b.cash_score - a.cash_score);\nconst winner = scored[0];\n\nreturn scored.map(m => ({\n  json: {\n    ...m,\n    eval_can_compare: true,\n    eval_winner_id: winner?.id || null,\n    eval_outcome: (m.id === winner?.id) ? 'Winner' : 'Loser',\n    eval_reason: 'CashScore v2: S=(0.6*P)+(0.25*R)+(0.15*O)',\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        240
+      ],
+      "id": "a9b48a8b-e186-4e33-808b-56f3f13b2ede",
+      "name": "Annotate + Compare"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Outcome|select",
+              "selectValue": "={{ $json.eval_outcome }}"
+            },
+            {
+              "key": "Score|number",
+              "numberValue": "={{ $json.eval_score }}"
+            },
+            {
+              "key": "EvaluatedAt|date",
+              "date": "={{ new Date().toISOString() }}",
+              "timezone": "Europe/Berlin"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        240
+      ],
+      "id": "b7bdd012-d735-4f29-90aa-2946b9c036f0",
+      "name": "Update Mutationsseite",
+      "credentials": {
+        "notionApi": {
+          "id": "UFeB6fvA7UVE0Y7r",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "59498dbb-596c-403b-9b2b-fcff7057774c",
+              "name": "pitch_db_id",
+              "value": "={{ String($json.id ?? '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "e6bf7b55-d5ae-48e6-afd6-06d9e655000a",
+              "name": "campaign_id",
+              "value": "={{ String($json.property_campaign_id ?? '').replace(/\\s+/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        352
+      ],
+      "id": "4218e7c5-f55b-49ef-a65f-f10ec9d4507a",
+      "name": "Edit Fields"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Mutation History holen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Mutation History holen1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Keep Mutation Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep Mutation Context": {
+      "main": [
+        [
+          {
+            "node": "Pitch DB / Campaign ID",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Hol Mutation Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Merge Output": {
+      "main": [
+        [
+          {
+            "node": "Update Mutations Page",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Replies holen": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Pitch DB / Campaign ID": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Replies holen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Normalize Merge Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mutation History holen": {
+      "main": [
+        [
+          {
+            "node": "Was ist fällig?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Was ist fällig?": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hol Mutation Page": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Update Mutations Page": {
+      "main": [
+        [
+          {
+            "node": "Update Pitch DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Pitch DB": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mutation History holen1": {
+      "main": [
+        [
+          {
+            "node": "Annotate + Compare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Annotate + Compare": {
+      "main": [
+        [
+          {
+            "node": "Update Mutationsseite",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Schedule Trigger": [
+      {
+        "json": {
+          "timestamp": "2026-02-04T21:29:08.497-05:00",
+          "Readable date": "February 4th 2026, 9:29:08 pm",
+          "Readable time": "9:29:08 pm",
+          "Day of week": "Wednesday",
+          "Year": "2026",
+          "Month": "February",
+          "Day of month": "04",
+          "Hour": "21",
+          "Minute": "29",
+          "Second": "08",
+          "Timezone": "America/New_York (UTC-05:00)"
+        }
+      }
+    ]
+  },
+  "versionId": "52fbfc31-96fa-4051-9867-8c21e0d26cee",
+  "activeVersionId": null,
+  "versionCounter": 2,
+  "triggerCount": 0,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-02-15T17:27:24.726Z",
+      "createdAt": "2026-02-15T17:27:24.726Z",
+      "role": "workflow:owner",
+      "workflowId": "DvWGx1JXs0iujgjPMlfe_",
+      "projectId": "8GvPsMsTWWvXqB1Q",
+      "project": {
+        "updatedAt": "2026-02-12T16:21:13.284Z",
+        "createdAt": "2026-02-12T15:43:34.508Z",
+        "id": "8GvPsMsTWWvXqB1Q",
+        "name": "Syntaxgroßinquisitor Monolith <finitolombardo7@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "cc96f19e-4677-417f-8669-4dfa83f22210"
+      }
+    }
+  ]
+}
