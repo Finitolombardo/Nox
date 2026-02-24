@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T20:00:00Z",
+  "updatedAt": "2026-02-24T20:55:00Z",
   "quests": [
     {
       "id": "OPS-001",
@@ -27,6 +27,15 @@
       "score": 8,
       "status": "open",
       "lastRunAt": null
+    },
+    {
+      "id": "SYS-001",
+      "ownerAgent": "main",
+      "type": "system",
+      "objective": "Build Agent Operating System + Quest Engine baseline and enforce non-autonomous mode",
+      "score": 10,
+      "status": "done",
+      "lastRunAt": "2026-02-24T20:55:00Z"
     }
   ]
 }
