@@ -1,0 +1,99 @@
+Alexander Lapizky
+Bessererstraße 16/2
+89073 Ulm
+
+Jobcenter Ulm
+Schwambergerstr. 1
+89073 Ulm
+
+BG-Nummer: 839D096901
+Ulm, den 01.12.2025
+
+Betreff: Widerspruch gegen den Ablehnungsbescheid vom 25.11.2025 – Einstiegsgeld nach § 16b SGB II
+
+Sehr geehrte Frau Wais,
+
+hiermit lege ich fristgerecht Widerspruch gegen Ihren Bescheid vom 25.11.2025 ein.
+
+Die Ablehnung meines Antrags auf Einstiegsgeld beruht auf einer offensichtlich unzutreffenden Einordnung meines Geschäftsmodells, einer unvollständigen Sachverhaltsermittlung und einer fehlerhaften Einschätzung der wirtschaftlichen Tragfähigkeit.
+
+Falsche Einordnung meines Geschäftsmodells
+
+In Ihrem Bescheid wird meine geplante selbstständige Tätigkeit praktisch wie ein nebenberufliches „Webdesign-/Webdeveloper-Gewerbe ohne erkennbare Erfolge“ bewertet. Diese Einstufung ist sachlich falsch.
+
+Mein Geschäftsmodell basiert nicht auf einfachen Webdienstleistungen, sondern auf einem automatisierten, KI-getriebenen Leadgenerierungs- und Outreach-System, wie es in der Praxis eher von mehreren Entwicklern in einem SaaS- oder Automationsunternehmen aufgebaut wird.
+
+Bereits umgesetzt und betriebsbereit sind unter anderem:
+– ein Data Layer mit Variant-ID-Logik, Kampagnenindex und strukturierten Metadaten
+– ein vollständiger Inputs Layer mit Live-API-Pulls, Statistiknormalisierung, Open-/Reply-Rate-Berechnung und automatischen DB-Updates
+– ein Evolution-Framework zur automatischen Variantenauswahl basierend auf Performancewerten
+– aktive A/B-Tests über ein Outreach-System mit derzeit rund 100 Leads pro Tag (Erweiterung auf 300 Leads/Tag ist technisch vorbereitet)
+– funktionierende Outreach-Pipelines, automatische Reply-Klassifizierung und Leadqualifizierung
+
+Aktuell befindet sich der Intelligence Layer mit automatisierter Variantengenerierung (Mutation durch LLM, Winner Selection, Loser Detection) in Phase 2 der Implementierung. Bei dem bisherigen Entwicklungstempo ist dieses Modul innerhalb weniger Tage bis maximal weniger Wochen einsatzbereit.
+
+Dieses System entspricht einer automatisierten „Campaign Evolution Engine“, wie sie im internationalen Performance-Marketing als hochentwickeltes Produkt gilt.
+
+Diese technische Tiefe und der reale Entwicklungsstand wurden im Bescheid vollständig ausgeblendet. Schon aus meinem Businessplan und den beigefügten Unterlagen hätte deutlich werden müssen, dass es sich um ein skalierbares, datengetriebenes Automationssystem handelt – nicht um ein einfaches Nebengewerbe.
+
+Konkreter Entwicklungsstand und bereits laufende Marktbearbeitung
+
+Zusätzlich zum Systemaufbau läuft die Marktbearbeitung bereits an:
+– Die Hauptdomain getvoidra.com ist online und bildet die Basis für meine Positionierung im Bereich KI-Automation und Leadgenerierung.
+– Weitere Domains und Landingpages befinden sich im Aufbau, um verschiedene Zielgruppen und Pain-Points (Marketingagenturen, Coaches/Berater, Immobilienmakler usw.) mit unterschiedlichen Einstiegen anzusprechen.
+– Das Outreach-System generiert schon jetzt täglich Leads, die laufend getestet werden. Die technische Infrastruktur erlaubt die zügige Skalierung auf 300 und mehr Kontakte pro Tag.
+
+Auf dieser Basis ergeben sich realistische Szenarien:
+– Minimum Case: 1–2 kleinere Retainer-Kunden (z. B. SEO-/Audit-/Radar-Pakete) mit monatlich ca. 2.000–5.000 Euro Umsatz
+– Average Case: 1–2 Agenturkunden mit Leadgen-/SEO-Suite (Retainer 3.000–8.000 Euro monatlich, Setup-Gebühren von 1.500–3.000 Euro)
+– High Ticket Case: internationale Kunden (USA u. a.) mit Leadgen- und Automationspaketen im Bereich 10.000–15.000 Euro monatlich
+
+Schon ein einziger Kunde im mittleren Preissegment würde meine Hilfebedürftigkeit beenden. Das ist keine theoretische Behauptung, sondern Branchenrealität im Bereich Performance-Marketing, SEO-Quick-Wins-Engines und B2B-Leadgen für Agenturen und Dienstleister.
+
+Dass dieser zentrale Punkt – ein einziger Vertrag reicht, um aus dem Leistungsbezug zu kommen – in Ihrem Bescheid überhaupt nicht thematisiert wird, ist ein gravierender Bewertungsfehler.
+
+Offensichtliche Relevanz der von Ihnen ignorierten Faktoren
+
+Für eine Entscheidung nach § 16b SGB II sind insbesondere folgende Punkte maßgeblich:
+– reale technische Infrastruktur und Entwicklungsstand
+– tatsächliches Umsatz- und Ertragspotenzial des konkreten Geschäftsmodells
+– relevante Marktbedingungen (hier: internationaler B2B-Markt, nicht lokales Kleingewerbe)
+– wirtschaftliche Tragfähigkeit bei realistischer Kundenzahl
+– aktuelle und geplante Outreach-Strategien (Leadgenerierung, A/B-Tests, Targeting)
+– bereits bestehende Systeme und Produkte (SEO-Engine, Competitor-Radar, Strategy-Dashboards usw.)
+– typische Branchenpraxis: zunächst Aufbau von System, Daten und Pipelines, danach Skalierung und Umsatz
+
+Diese Punkte sind in meinem Fall nicht „nice to have“, sondern der Kern dessen, was mein Geschäft tragfähig macht. Gerade deshalb ist es auffällig, dass sie in Ihrem Bescheid praktisch nicht vorkommen.
+
+Dass ein komplexes Automations- und Leadgen-System in den ersten drei Monaten primär aus Infrastruktur-Aufbau, Debugging, API-Integration, Workflow-Architektur, Datenpipelines, A/B-Testing-Setup und Domain-/Mailserverkonfiguration besteht, ist im digitalen Umfeld absolut normal. Daraus in dieser frühen Phase den Schluss zu ziehen, das Modell sei „nicht tragfähig“, ohne die Systeme und Marktstrategie konkret zu würdigen, ist fachlich nicht haltbar.
+
+Fehlbewertung der Konkurrenzsituation
+
+Sie führen aus, die Konkurrenz sei „zu groß und erfolgreicher“. Diese Aussage zeigt, dass mein Markt fälschlich wie ein lokaler Dienstleistungsmarkt betrachtet wurde.
+
+Tatsächlich arbeite ich in einem weltweiten B2B-Markt (DACH, EU, UK, USA, Kanada, Australien u. a.), in dem automatisierte SEO-/Leadgen-/Outbound-Systeme mit klaren Ergebnissen (mehr Leads, bessere Rankings, mehr Termine) verkauft werden. Ich konkurriere nicht mit klassischen Webdesignern in Ulm, sondern mit Agenturen und Automationsanbietern weltweit, die genau solche Systeme einkaufen oder integrieren wollen.
+
+Auch hier ist entscheidend: In diesem Markt genügt ein kleiner Kundenstamm, um die Hilfebedürftigkeit nachhaltig zu beenden. Diese strukturelle Besonderheit hätte bei einer sachgerechten Ermessensentscheidung berücksichtigt werden müssen.
+
+Rechtliche Würdigung – Ermessensfehlgebrauch
+
+Zusammengefasst liegt ein Ermessensfehler vor, weil
+– mein Geschäftsmodell inhaltlich falsch eingeordnet wurde,
+– der internationale, hochspezialisierte Markt nicht erkannt wurde,
+– die vorhandene technische Infrastruktur ignoriert wurde,
+– die bereits laufende Marktbearbeitung (Leads, A/B-Tests, Outreach) unberücksichtigt blieb,
+– der Maßstab „nach wenigen Monaten noch keine Gewinne, also nicht tragfähig“ bei digitalen Automationsprojekten offensichtlich ungeeignet ist,
+– wesentliche, leicht erkennbare Umstände aus meinen Unterlagen nicht in die Entscheidung eingeflossen sind.
+
+Diese Punkte sind keine Detailfragen, sondern die tragenden Kriterien für die Beurteilung der Tragfähigkeit nach § 16b SGB II. Dass sie im Bescheid kaum oder gar nicht auftauchen, macht deutlich, dass das Ermessen auf einer unzutreffenden Tatsachengrundlage ausgeübt wurde.
+
+Antrag
+
+Ich beantrage daher den Bescheid vom 25.11.2025 aufzuheben und meinen Antrag auf Einstiegsgeld nach § 16b SGB II unter Berücksichtigung der oben dargestellten tatsächlichen und wirtschaftlichen Gegebenheiten neu zu bescheiden.
+
+Gerne lege ich Ihnen auf Anforderung detaillierte technische Nachweise (Workflows, Systemdokumentationen, Logs, Beispielreports, aktuelle Outreach-Kennzahlen) vor, damit die Tragfähigkeit meines Geschäftsmodells vollständig und sachgerecht bewertet werden kann.
+
+Mit freundlichen Grüßen
+
+Alexander Lapizky
+Voidra Labs
