@@ -1,0 +1,441 @@
+{
+  "timestamp_utc": "2026-02-24T10:36:16Z",
+  "openclaw_status": 
+{
+  "heartbeat": {
+    "defaultAgentId": "main",
+    "agents": [
+      {
+        "agentId": "main",
+        "enabled": true,
+        "every": "30m",
+        "everyMs": 1800000
+      }
+    ]
+  },
+  "channelSummary": [
+    "Telegram: configured",
+    "  - default (token:config)"
+  ],
+  "queuedSystemEvents": [],
+  "sessions": {
+    "paths": [
+      "/root/.openclaw/agents/main/sessions/sessions.json"
+    ],
+    "count": 3,
+    "defaults": {
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    "recent": [
+      {
+        "agentId": "main",
+        "key": "agent:main:main",
+        "kind": "direct",
+        "sessionId": "2a924f58-0528-4fa9-9a1e-49447014d2b9",
+        "updatedAt": 1771929277878,
+        "age": 104435,
+        "systemSent": true,
+        "abortedLastRun": false,
+        "inputTokens": 973,
+        "outputTokens": 909,
+        "cacheRead": 90880,
+        "cacheWrite": 0,
+        "totalTokens": 91853,
+        "totalTokensFresh": true,
+        "remainingTokens": 180147,
+        "percentUsed": 34,
+        "model": "gpt-5.3-codex",
+        "contextTokens": 272000,
+        "flags": [
+          "system",
+          "id:2a924f58-0528-4fa9-9a1e-49447014d2b9"
+        ]
+      },
+      {
+        "agentId": "main",
+        "key": "agent:main:telegram:direct:7458143895",
+        "kind": "direct",
+        "sessionId": "84993af5-7bb6-4291-827b-eb05497aadba",
+        "updatedAt": 1771927585507,
+        "age": 1796806,
+        "systemSent": true,
+        "abortedLastRun": false,
+        "inputTokens": 486,
+        "outputTokens": 241,
+        "cacheRead": 13312,
+        "cacheWrite": 0,
+        "totalTokens": 13798,
+        "totalTokensFresh": true,
+        "remainingTokens": 258202,
+        "percentUsed": 5,
+        "model": "gpt-5.3-codex",
+        "contextTokens": 272000,
+        "flags": [
+          "system",
+          "id:84993af5-7bb6-4291-827b-eb05497aadba"
+        ]
+      },
+      {
+        "key": "telegram:slash:7458143895",
+        "kind": "direct",
+        "sessionId": "dc578f61-b28b-4bae-afbd-e451d79a78ef",
+        "updatedAt": 1771927431741,
+        "age": 1950572,
+        "totalTokens": null,
+        "totalTokensFresh": false,
+        "remainingTokens": null,
+        "percentUsed": null,
+        "model": "gpt-5.3-codex",
+        "contextTokens": 272000,
+        "flags": [
+          "id:dc578f61-b28b-4bae-afbd-e451d79a78ef"
+        ]
+      }
+    ],
+    "byAgent": [
+      {
+        "agentId": "main",
+        "path": "/root/.openclaw/agents/main/sessions/sessions.json",
+        "count": 3,
+        "recent": [
+          {
+            "agentId": "main",
+            "key": "agent:main:main",
+            "kind": "direct",
+            "sessionId": "2a924f58-0528-4fa9-9a1e-49447014d2b9",
+            "updatedAt": 1771929277878,
+            "age": 104435,
+            "systemSent": true,
+            "abortedLastRun": false,
+            "inputTokens": 973,
+            "outputTokens": 909,
+            "cacheRead": 90880,
+            "cacheWrite": 0,
+            "totalTokens": 91853,
+            "totalTokensFresh": true,
+            "remainingTokens": 180147,
+            "percentUsed": 34,
+            "model": "gpt-5.3-codex",
+            "contextTokens": 272000,
+            "flags": [
+              "system",
+              "id:2a924f58-0528-4fa9-9a1e-49447014d2b9"
+            ]
+          },
+          {
+            "agentId": "main",
+            "key": "agent:main:telegram:direct:7458143895",
+            "kind": "direct",
+            "sessionId": "84993af5-7bb6-4291-827b-eb05497aadba",
+            "updatedAt": 1771927585507,
+            "age": 1796806,
+            "systemSent": true,
+            "abortedLastRun": false,
+            "inputTokens": 486,
+            "outputTokens": 241,
+            "cacheRead": 13312,
+            "cacheWrite": 0,
+            "totalTokens": 13798,
+            "totalTokensFresh": true,
+            "remainingTokens": 258202,
+            "percentUsed": 5,
+            "model": "gpt-5.3-codex",
+            "contextTokens": 272000,
+            "flags": [
+              "system",
+              "id:84993af5-7bb6-4291-827b-eb05497aadba"
+            ]
+          },
+          {
+            "agentId": "main",
+            "key": "telegram:slash:7458143895",
+            "kind": "direct",
+            "sessionId": "dc578f61-b28b-4bae-afbd-e451d79a78ef",
+            "updatedAt": 1771927431741,
+            "age": 1950572,
+            "totalTokens": null,
+            "totalTokensFresh": false,
+            "remainingTokens": null,
+            "percentUsed": null,
+            "model": "gpt-5.3-codex",
+            "contextTokens": 272000,
+            "flags": [
+              "id:dc578f61-b28b-4bae-afbd-e451d79a78ef"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "os": {
+    "platform": "linux",
+    "arch": "x64",
+    "release": "6.8.0-100-generic",
+    "label": "linux 6.8.0-100-generic (x64)"
+  },
+  "update": {
+    "root": "/usr/lib/node_modules/openclaw",
+    "installKind": "package",
+    "packageManager": "pnpm",
+    "deps": {
+      "manager": "pnpm",
+      "status": "unknown",
+      "lockfilePath": "/usr/lib/node_modules/openclaw/pnpm-lock.yaml",
+      "markerPath": "/usr/lib/node_modules/openclaw/node_modules/.modules.yaml",
+      "reason": "lockfile missing"
+    },
+    "registry": {
+      "latestVersion": "2026.2.23"
+    }
+  },
+  "updateChannel": "stable",
+  "updateChannelSource": "default",
+  "memory": {
+    "agentId": "main",
+    "backend": "builtin",
+    "files": 0,
+    "chunks": 0,
+    "dirty": false,
+    "workspaceDir": "/home/agentadmin/.openclaw/workspace",
+    "dbPath": "/root/.openclaw/memory/main.sqlite",
+    "provider": "none",
+    "requestedProvider": "auto",
+    "sources": [
+      "memory"
+    ],
+    "extraPaths": [],
+    "sourceCounts": [
+      {
+        "source": "memory",
+        "files": 0,
+        "chunks": 0
+      }
+    ],
+    "cache": {
+      "enabled": true,
+      "entries": 0
+    },
+    "fts": {
+      "enabled": true,
+      "available": true
+    },
+    "vector": {
+      "enabled": true
+    },
+    "batch": {
+      "enabled": false,
+      "failures": 0,
+      "limit": 2,
+      "wait": true,
+      "concurrency": 2,
+      "pollIntervalMs": 2000,
+      "timeoutMs": 3600000
+    },
+    "custom": {
+      "searchMode": "fts-only",
+      "providerUnavailableReason": "No API key found for provider \"openai\". You are authenticated with OpenAI Codex OAuth. Use openai-codex/gpt-5.3-codex (OAuth) or set OPENAI_API_KEY to use openai/gpt-5.1-codex.\n\nNo API key found for provider \"google\". Auth store: /root/.openclaw/agents/main/agent/auth-profiles.json (agentDir: /root/.openclaw/agents/main/agent). Configure auth for this agent (openclaw agents add <id>) or copy auth-profiles.json from the main agentDir.\n\nNo API key found for provider \"voyage\". Auth store: /root/.openclaw/agents/main/agent/auth-profiles.json (agentDir: /root/.openclaw/agents/main/agent). Configure auth for this agent (openclaw agents add <id>) or copy auth-profiles.json from the main agentDir.\n\nNo API key found for provider \"mistral\". Auth store: /root/.openclaw/agents/main/agent/auth-profiles.json (agentDir: /root/.openclaw/agents/main/agent). Configure auth for this agent (openclaw agents add <id>) or copy auth-profiles.json from the main agentDir."
+    }
+  },
+  "memoryPlugin": {
+    "enabled": true,
+    "slot": "memory-core"
+  },
+  "gateway": {
+    "mode": "local",
+    "url": "ws://127.0.0.1:18791",
+    "urlSource": "local loopback",
+    "misconfigured": false,
+    "reachable": true,
+    "connectLatencyMs": 42,
+    "self": {
+      "host": "ubuntu-4gb-nbg1-2",
+      "ip": "91.99.172.36",
+      "version": "2026.2.19-2",
+      "platform": "linux 6.8.0-100-generic"
+    },
+    "error": null
+  },
+  "gatewayService": {
+    "label": "systemd",
+    "installed": true,
+    "loadedText": "enabled",
+    "runtimeShort": "running (pid 3499232, state active)"
+  },
+  "nodeService": {
+    "label": "systemd",
+    "installed": false,
+    "loadedText": "disabled",
+    "runtimeShort": "stopped (state inactive)"
+  },
+  "agents": {
+    "defaultId": "main",
+    "agents": [
+      {
+        "id": "main",
+        "workspaceDir": "/home/agentadmin/.openclaw/workspace",
+        "bootstrapPending": true,
+        "sessionsPath": "/root/.openclaw/agents/main/sessions/sessions.json",
+        "sessionsCount": 3,
+        "lastUpdatedAt": 1771929277878,
+        "lastActiveAgeMs": 104298
+      }
+    ],
+    "totalSessions": 3,
+    "bootstrapPendingCount": 1
+  },
+  "securityAudit": {
+    "ts": 1771929382382,
+    "summary": {
+      "critical": 0,
+      "warn": 1,
+      "info": 1
+    },
+    "findings": [
+      {
+        "checkId": "summary.attack_surface",
+        "severity": "info",
+        "title": "Attack surface summary",
+        "detail": "groups: open=0, allowlist=1\ntools.elevated: enabled\nhooks.webhooks: disabled\nhooks.internal: disabled\nbrowser control: enabled"
+      },
+      {
+        "checkId": "gateway.trusted_proxies_missing",
+        "severity": "warn",
+        "title": "Reverse proxy headers are not trusted",
+        "detail": "gateway.bind is loopback and gateway.trustedProxies is empty. If you expose the Control UI through a reverse proxy, configure trusted proxies so local-client checks cannot be spoofed.",
+        "remediation": "Set gateway.trustedProxies to your proxy IPs or keep the Control UI local-only."
+      }
+    ]
+  },
+  "health": {
+    "ok": true,
+    "ts": 1771929382461,
+    "durationMs": 33,
+    "channels": {
+      "telegram": {
+        "configured": true,
+        "running": false,
+        "lastStartAt": null,
+        "lastStopAt": null,
+        "lastError": null,
+        "tokenSource": "none",
+        "probe": {
+          "ok": true,
+          "status": null,
+          "error": null,
+          "elapsedMs": 33,
+          "bot": {
+            "id": 8331201342,
+            "username": "Noxrammus_bot",
+            "canJoinGroups": true,
+            "canReadAllGroupMessages": false,
+            "supportsInlineQueries": false
+          },
+          "webhook": {
+            "url": "",
+            "hasCustomCert": false
+          }
+        },
+        "lastProbeAt": 1771929382461,
+        "mode": null,
+        "accountId": "default",
+        "accounts": {
+          "default": {
+            "configured": true,
+            "running": false,
+            "lastStartAt": null,
+            "lastStopAt": null,
+            "lastError": null,
+            "tokenSource": "none",
+            "probe": {
+              "ok": true,
+              "status": null,
+              "error": null,
+              "elapsedMs": 33,
+              "bot": {
+                "id": 8331201342,
+                "username": "Noxrammus_bot",
+                "canJoinGroups": true,
+                "canReadAllGroupMessages": false,
+                "supportsInlineQueries": false
+              },
+              "webhook": {
+                "url": "",
+                "hasCustomCert": false
+              }
+            },
+            "lastProbeAt": 1771929382461,
+            "mode": null,
+            "accountId": "default"
+          }
+        }
+      }
+    },
+    "channelOrder": [
+      "telegram"
+    ],
+    "channelLabels": {
+      "telegram": "Telegram"
+    },
+    "heartbeatSeconds": 1800,
+    "defaultAgentId": "main",
+    "agents": [
+      {
+        "agentId": "main",
+        "isDefault": true,
+        "heartbeat": {
+          "enabled": true,
+          "every": "30m",
+          "everyMs": 1800000,
+          "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.",
+          "target": "last",
+          "ackMaxChars": 300
+        },
+        "sessions": {
+          "path": "/root/.openclaw/agents/main/sessions/sessions.json",
+          "count": 3,
+          "recent": [
+            {
+              "key": "agent:main:main",
+              "updatedAt": 1771929277878,
+              "age": 104550
+            },
+            {
+              "key": "agent:main:telegram:direct:7458143895",
+              "updatedAt": 1771927585507,
+              "age": 1796921
+            },
+            {
+              "key": "telegram:slash:7458143895",
+              "updatedAt": 1771927431741,
+              "age": 1950687
+            }
+          ]
+        }
+      }
+    ],
+    "sessions": {
+      "path": "/root/.openclaw/agents/main/sessions/sessions.json",
+      "count": 3,
+      "recent": [
+        {
+          "key": "agent:main:main",
+          "updatedAt": 1771929277878,
+          "age": 104550
+        },
+        {
+          "key": "agent:main:telegram:direct:7458143895",
+          "updatedAt": 1771927585507,
+          "age": 1796921
+        },
+        {
+          "key": "telegram:slash:7458143895",
+          "updatedAt": 1771927431741,
+          "age": 1950687
+        }
+      ]
+    }
+  },
+  "lastHeartbeat": null
+}
+}
