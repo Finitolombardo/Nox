@@ -1,0 +1,262 @@
+{
+  "name": "Lead-Handler (Reply -> Sheet + Draft + Instantly)",
+  "nodes": [
+    {
+      "id": "b693c261-be7d-4a04-85b6-8246348a2dd7",
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "9eb93f0e-8218-4a9c-8e94-ef07da103101",
+      "name": "IF Positive Reply",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ ['positive','interested','meeting'].includes(String($json.reply_classification || $json.classification || '').toLowerCase()) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "01634a96-bc7a-49b1-ba0c-faff18100255",
+      "name": "IF Negative Reply",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        460
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ ['negative','not_interested','unsubscribe','do_not_contact'].includes(String($json.reply_classification || $json.classification || '').toLowerCase()) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "3f54bff6-175b-46d3-8226-c06c473fe1b6",
+      "name": "Sheet: Mark POSITIVE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        820,
+        220
+      ],
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1mmbgpNWjIYdxycgMILbypeVwuNX5w6QrWeSIGlXc5BU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Beautysalon",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "BestEmail": "={{$json.lead_email || $json.email}}",
+            "Status": "POSITIVE",
+            "LastAction": "Lead-Handler: positive",
+            "ReplyClass": "={{$json.reply_classification || $json.classification}}"
+          },
+          "matchingColumns": [
+            "BestEmail"
+          ],
+          "schema": []
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "3bc078e6-0e3c-45a5-b991-31a27fa08e5d",
+      "name": "Gmail Draft (Positive)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1100,
+        220
+      ],
+      "parameters": {
+        "resource": "draft",
+        "operation": "create",
+        "toList": "={{$json.lead_email || $json.email}}",
+        "subject": "={{'Kurzer nächster Schritt zu eurem WhatsApp-Bot – ' + ($json.company_name || $json.company || '')}}",
+        "message": "={{'Hi ' + ($json.first_name || $json.firstName || '') + ',\\n\\nstark, danke für die Rückmeldung.\\nWie besprochen: 79€ Setup + 100€/Monat für WhatsApp-Bot + Formular.\\n\\nWenn es passt, sende ich dir direkt den 10-Minuten-Onboarding-Link.\\n\\nLG'}}"
+      }
+    },
+    {
+      "id": "d7ec79a4-48c0-482f-8c83-e3bb0d269ab9",
+      "name": "Instantly: Block/Remove Lead",
+      "type": "n8n-nodes-instantly.instantly",
+      "typeVersion": 1,
+      "position": [
+        840,
+        500
+      ],
+      "parameters": {
+        "resource": "lead",
+        "operation": "delete",
+        "campaignId": "={{$json.campaign_id || $json.instantly_campaign_id}}",
+        "leadEmail": "={{$json.lead_email || $json.email}}"
+      },
+      "credentials": {
+        "instantlyApi": {
+          "id": "4pHnss8Z3xInTCAZ",
+          "name": "Instantly account"
+        }
+      }
+    },
+    {
+      "id": "80eda589-dd39-415f-b1f0-d9fecafb5224",
+      "name": "Sheet: Mark NEGATIVE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1110,
+        500
+      ],
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1mmbgpNWjIYdxycgMILbypeVwuNX5w6QrWeSIGlXc5BU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Beautysalon",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "BestEmail": "={{$json.lead_email || $json.email}}",
+            "Status": "NEGATIVE",
+            "LastAction": "Lead-Handler: blocked/removed",
+            "ReplyClass": "={{$json.reply_classification || $json.classification}}"
+          },
+          "matchingColumns": [
+            "BestEmail"
+          ],
+          "schema": []
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "IF Positive Reply",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IF Negative Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Positive Reply": {
+      "main": [
+        [
+          {
+            "node": "Sheet: Mark POSITIVE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Sheet: Mark POSITIVE": {
+      "main": [
+        [
+          {
+            "node": "Gmail Draft (Positive)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Negative Reply": {
+      "main": [
+        [
+          {
+            "node": "Instantly: Block/Remove Lead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Instantly: Block/Remove Lead": {
+      "main": [
+        [
+          {
+            "node": "Sheet: Mark NEGATIVE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "active": false,
+  "versionId": "8da5a68a-a3e2-4ff5-97f3-d4cbba98053f"
+}
