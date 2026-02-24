@@ -22,4 +22,5 @@ Innovation: Brücke von Information > Verhalten > Identität über Training stat
 - Immediate stability target: 2000€/month; 6-month aspiration: 10k–20k/month.
 - Repo intent mapping: `Alpha_Mind_Hub` (authority/blog), `obsidian_nexus` (sales), `VOIDRA` (sales).
 - User preference: keep memory updated whenever meaningful strategic/user-state info changes.
+- Writing style preference: long-form, deep, radical, confrontational, high-conviction tone; no soft NPC-safe language.
 - New agent directive (2026-02-24): operate as brutal strategic mirror; challenge weak reasoning, enforce anti-drifter execution, prioritize direct objective-aligned action, and intervene on hesitation.
