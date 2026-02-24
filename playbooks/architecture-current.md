@@ -25,11 +25,12 @@ Host role: primary OpenClaw + automation + observability + web ingress
   - `:3002` mapped from Docker (`firecrawl-api`)
 
 ## 4) Automation & Services
-- systemd active:
-  - `openclaw-gateway` (running)
-  - `n8n` (running)
-  - `docker` (running)
-- PM2 currently not managing active processes
+- user-level systemd active:
+  - `openclaw-gateway.service` (running)
+- system-level systemd active:
+  - `n8n.service` (running)
+  - `docker.service` (running)
+- `pm2-agentadmin.service` is installed but currently inactive
 
 ## 5) Docker Stack (observed)
 ### Observability
@@ -51,9 +52,18 @@ Host role: primary OpenClaw + automation + observability + web ingress
 2. Public `:3002` exposure should be intentional and documented (auth/rate-limit/WAF).
 3. PM2 is inactive while systemd is active; process ownership standard should be fixed (single source of truth).
 
-## 7) Weekly Verification Checklist
+## 7) Config Paths & Runtime Sources (Redacted)
+- OpenClaw user unit: `/root/.config/systemd/user/openclaw-gateway.service`
+- n8n systemd unit: `/etc/systemd/system/n8n.service`
+- Docker systemd unit: `/usr/lib/systemd/system/docker.service`
+- PM2 systemd unit: `/etc/systemd/system/pm2-agentadmin.service`
+- OpenClaw data root (symlink): `/home/agentadmin/.openclaw -> /mnt/HC_Volume_103972109/openclaw_data`
+- n8n data root (symlink): `/home/agentadmin/.n8n -> /mnt/HC_Volume_103972109/n8n_data`
+
+## 8) Weekly Verification Checklist
 - Run `openclaw status --deep`
-- Verify service manager consistency (systemd vs PM2)
+- Verify user/systemd units are healthy (`systemctl --user status openclaw-gateway`, `systemctl status n8n docker`)
 - Verify public ports (`ss -ltnup`) against intended exposure list
 - Validate Docker stack health (`docker ps`)
+- Validate unit files did not gain plaintext credentials unexpectedly
 - Update this file if topology/ports/services changed
