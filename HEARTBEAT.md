@@ -16,6 +16,9 @@ Früherkennung von Verzettelung + Kostenkontrolle.
    - `./scripts/backup-alert-check.sh`
 5. Cash-Score Report (22:00 UTC, Telegram)
    - `./scripts/cash-score-report.sh`
+6. Quest-Update (Heartbeat-getrieben)
+   - Offene Quests in Notion prüfen
+   - Nächste konkrete Aktion je Quest aktualisieren (keine vagen TODOs)
 
 ## Alarmregel (ROI-Logik)
 Wir nutzen `total_tokens_sum` als API-Kosten-Proxy:
