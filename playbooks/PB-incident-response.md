@@ -7,6 +7,13 @@ Owner: NOX
 ## Ziel
 Ausfälle und Degradationen schnell eindämmen, Ursache isolieren, Service stabil wiederherstellen.
 
+## Evidence Sources (für diese Version)
+- Runtime checks: `openclaw status --deep`, `ss -ltnup`, `docker ps`
+- Service state: `systemctl --user status openclaw-gateway`, `systemctl status n8n docker`
+- Architekturbasis: `playbooks/architecture-current.md`
+- Deploy/Rollback-Referenz: `playbooks/PB-deploy-rollback.md`
+- Secret-Policy-Basis: `playbooks/secrets-inventory-redacted.md`
+
 ## Scope
 - OpenClaw Gateway
 - n8n

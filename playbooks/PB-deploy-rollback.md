@@ -7,6 +7,12 @@ Owner: NOX
 ## Ziel
 Deploys ohne Roulette: schnell ausrollen, sofort verifizieren, bei Fehlern in <10 Minuten sauber zurück.
 
+## Evidence Sources (für diese Version)
+- Runtime checks: `openclaw status --deep`, `docker ps`, `ss -ltnup`
+- Service control: `systemctl status n8n docker`, `systemctl --user status openclaw-gateway`
+- Architekturbasis: `playbooks/architecture-current.md`
+- Secret-Policy-Basis: `playbooks/secrets-inventory-redacted.md`
+
 ## Scope
 - OpenClaw Gateway (user systemd)
 - n8n (systemd)
