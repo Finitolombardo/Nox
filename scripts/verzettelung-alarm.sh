@@ -5,7 +5,14 @@ cd "$BASE_DIR"
 
 WINDOW_MIN="${1:-60}"
 COST_DIR="logs/cost-tracker"
+DISABLE_FLAG_FILE=".alerts/verzettelung.disabled"
 mkdir -p "$COST_DIR"
+
+# User kill-switch: when present, this alert is fully disabled.
+if [ -f "$DISABLE_FLAG_FILE" ]; then
+  echo "HEARTBEAT_OK"
+  exit 0
+fi
 
 # 1) New snapshot
 SNAP_JSON="$(./scripts/cost-snapshot.sh "$COST_DIR")"

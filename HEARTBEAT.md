@@ -9,8 +9,9 @@ Früherkennung von Verzettelung + Kostenkontrolle.
    - `openclaw status --deep`
 2. Cost Snapshot erfassen
    - `./scripts/cost-snapshot.sh`
-3. Verzettelungs-Alarm prüfen (60m Fenster)
+3. Verzettelungs-Alarm prüfen (60m Fenster) [DERZEIT DEAKTIVIERT]
    - `./scripts/verzettelung-alarm.sh 60`
+   - Kill-Switch: `.alerts/verzettelung.disabled`
 4. Backup-Alarm prüfen (Silent Success, Noisy Failure)
    - `./scripts/backup-alert-check.sh`
 5. Cash-Score Report (22:00 UTC, Telegram)
