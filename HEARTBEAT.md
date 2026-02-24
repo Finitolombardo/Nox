@@ -11,6 +11,8 @@ Früherkennung von Verzettelung + Kostenkontrolle.
    - `./scripts/cost-snapshot.sh`
 3. Verzettelungs-Alarm prüfen (60m Fenster)
    - `./scripts/verzettelung-alarm.sh 60`
+4. Backup-Alarm prüfen (Silent Success, Noisy Failure)
+   - `./scripts/backup-alert-check.sh`
 
 ## Alarmregel (ROI-Logik)
 Wir nutzen `total_tokens_sum` als API-Kosten-Proxy:

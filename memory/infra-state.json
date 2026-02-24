@@ -12,12 +12,22 @@
   "ufw": {
     "active": true,
     "default_incoming": "deny",
-    "allowed_tcp": [22, 80, 443, 3002]
+    "allowed_tcp": [
+      22,
+      80,
+      443,
+      3002
+    ]
   },
   "openclaw": {
     "allowInsecureAuth": false,
     "security_audit_summary": "0 critical · 1 warn · 1 info",
     "remaining_warning": "gateway.trusted_proxies_missing"
   },
-  "phase_b_container_migration": "blocked"
+  "phase_b_container_migration": "blocked",
+  "backup": {
+    "lastSuccessUtc": "2026-02-24T10:44:54Z",
+    "lastArchive": "/home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-02-24T10-44-49Z.tar.gz",
+    "status": "ok"
+  }
 }
