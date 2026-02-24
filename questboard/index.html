@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Questboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 20px; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; }
+    .col { border:1px solid #ddd; border-radius:10px; padding:12px; min-width:260px; flex:1; }
+    .card { border:1px solid #eee; border-radius:10px; padding:10px; margin-top:10px; }
+    .p0 { font-weight:700; color:#b00020; }
+    .p1 { font-weight:700; color:#8a4b00; }
+    .p2 { font-weight:700; color:#0b6b0b; }
+    code { background:#f5f5f5; padding:2px 6px; border-radius:6px; }
+    button { padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    input { padding:8px; border-radius:8px; border:1px solid #ddd; width: 240px; }
+  </style>
+</head>
+<body>
+  <h2>Questboard</h2>
+
+  <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+    <button id="reload">Reload</button>
+    <button id="prune">Prune</button>
+    <span style="opacity:.7;">API: <code>/api/quests</code></span>
+  </div>
+
+  <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:18px;">
+    <input id="title" placeholder="Title" />
+    <input id="dedupe" placeholder="dedupe_key" />
+    <button id="create">Create (Backlog)</button>
+  </div>
+
+  <div class="row" id="board"></div>
+
+<script>
+const COLS = ["Backlog","Ready","Doing","Blocked","Done","Archived"];
+const board = document.getElementById("board");
+
+async function api(path="", method="GET", body=null){
+  const res = await fetch("/api/quests" + path, {
+    method,
+    headers: body ? {"Content-Type":"application/json"} : {},
+    body: body ? JSON.stringify(body) : null
+  });
+  const data = await res.json().catch(()=> ({}));
+  if(!res.ok){
+    alert(data.error || ("HTTP " + res.status));
+    throw new Error(data.error || res.status);
+  }
+  return data;
+}
+
+function priClass(p){
+  if(p==="P0") return "p0";
+  if(p==="P1") return "p1";
+  return "p2";
+}
+
+function render(data){
+  board.innerHTML = "";
+  for(const colName of COLS){
+    const col = document.createElement("div");
+    col.className = "col";
+    col.innerHTML = `<h3>${colName}</h3>`;
+    const items = (data.quests||[]).filter(q => q.status === colName);
+    for(const q of items){
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div><strong>${q.title || "(no title)"}</strong></div>
+        <div style="margin-top:6px; font-size:13px;">
+          <span class="${priClass(q.priority)}">${q.priority}</span>
+          <span style="opacity:.7;"> · score ${Number(q.score||0).toFixed(1)} · ${q.id}</span>
+        </div>
+        <div style="margin-top:6px; opacity:.8; font-size:13px;">${q.dedupe_key || ""}</div>
+      `;
+      col.appendChild(card);
+    }
+    board.appendChild(col);
+  }
+}
+
+async function load(){
+  const d = await api("");
+  render(d);
+}
+
+document.getElementById("reload").onclick = load;
+document.getElementById("prune").onclick = async () => { await api("/prune","POST"); await load(); };
+
+document.getElementById("create").onclick = async () => {
+  const title = document.getElementById("title").value.trim();
+  const dedupe_key = document.getElementById("dedupe").value.trim();
+  if(!title || !dedupe_key){ alert("title + dedupe_key required"); return; }
+  await api("", "POST", { title, dedupe_key, effort:"M", impact:3, urgency:3, confidence:3 });
+  document.getElementById("title").value = "";
+  document.getElementById("dedupe").value = "";
+  await load();
+};
+
+load();
+</script>
+</body>
+</html>

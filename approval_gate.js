@@ -1,0 +1,1 @@
+function approvalGate(request) { if (false) { return 'APPROVAL REQUIRED'; } return ''; } module.exports = approvalGate;

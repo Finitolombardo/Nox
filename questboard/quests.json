@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "title": "OpenClaw Questboard",
+    "updated_at": "2026-02-21T03:18:22.122261+00:00"
+  },
+  "quests": [
+    {
+      "title": "Dedupe Test 1",
+      "dedupe_key": "dup-1",
+      "effort": "S",
+      "impact": 3,
+      "urgency": 3,
+      "confidence": 3,
+      "id": "Q-2026-0001",
+      "created_at": "2026-02-21T03:15:54.526529+00:00",
+      "updated_at": "2026-02-21T03:15:54.526534+00:00",
+      "desc": "",
+      "tags": [],
+      "owner": "you",
+      "status": "Backlog",
+      "priority": "P0",
+      "next_action": "",
+      "acceptance_criteria": [],
+      "stale": false,
+      "score": 27.0
+    },
+    {
+      "title": "Second Quest",
+      "dedupe_key": "dup-2",
+      "effort": "S",
+      "impact": 2,
+      "urgency": 2,
+      "confidence": 2,
+      "id": "Q-2026-0002",
+      "created_at": "2026-02-21T03:17:05.001463+00:00",
+      "updated_at": "2026-02-21T03:17:58.912197+00:00",
+      "desc": "",
+      "tags": [],
+      "owner": "you",
+      "status": "Ready",
+      "priority": "P1",
+      "next_action": "Add quests.json schema fields and verify GET /api/quests",
+      "acceptance_criteria": [
+        "GET /api/quests returns ok:true and quests array",
+        "Quest Q-2026-0002 shows status Ready in GET output"
+      ],
+      "stale": false,
+      "score": 8.0
+    },
+    {
+      "title": "P0-1",
+      "dedupe_key": "p0-1",
+      "effort": "S",
+      "impact": 5,
+      "urgency": 5,
+      "confidence": 5,
+      "id": "Q-2026-0003",
+      "created_at": "2026-02-21T03:18:22.122187+00:00",
+      "updated_at": "2026-02-21T03:18:22.122205+00:00",
+      "desc": "",
+      "tags": [],
+      "owner": "you",
+      "status": "Backlog",
+      "priority": "P0",
+      "next_action": "",
+      "acceptance_criteria": [],
+      "stale": false,
+      "score": 125.0
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+function redactMessage(message) { return message.replace(/sk-test-[\w\d]+/g, '***REDACTED***'); } module.exports = redactMessage;
