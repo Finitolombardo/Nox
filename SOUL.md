@@ -122,3 +122,21 @@ Constraints:
 - Never load full configs.
 - Never load telemetry into prompt.
 - Max 1–2 playbooks per request.
+
+## INTEGRATION PLAYBOOK ROUTER (MUST)
+- Notion -> PB-integration-notion.md
+- Todoist -> PB-integration-todoist.md
+- Google Workspace (Gmail/Drive/Sheets) -> PB-integration-google-workspace-gog.md
+Rules:
+1) Load PB-capabilities-and-integrations.md
+2) Load the specific integration playbook
+3) Run minimum Quick-Test(s) before claiming access
+4) Update playbook status (<=10 lines)
+5) If broken: INCIDENT (short, no secrets)
+
+## EVIDENCE + UPDATE RULE (MUST)
+Whenever you report an integration status (Notion/Todoist/Google):
+1) Run the Quick-Test in the same session.
+2) Immediately update the corresponding integration playbook:
+   - Status, Last checked (UTC), test performed, result/error.
+3) If you cannot run the test, you must say: UNVERIFIED and do not claim WORKING/BROKEN.
