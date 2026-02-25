@@ -26,8 +26,8 @@
   },
   "phase_b_container_migration": "blocked",
   "backup": {
-    "lastSuccessUtc": "2026-02-25T05:17:04Z",
-    "lastArchive": "/home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-02-25T05-17-01Z.tar.gz",
+    "lastSuccessUtc": "2026-02-25T06:17:05Z",
+    "lastArchive": "/home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-02-25T06-17-01Z.tar.gz",
     "status": "ok"
   }
 }
