@@ -1,12 +1,16 @@
 # PB-integration-google-workspace-gog.md
 
 ## Status
-- Status: UNVERIFIED (non-interactive agentadmin check without env)
-- Last checked: 2026-02-25 22:32:00 UTC
+- Status: WORKING (verified with env injection)
+- Last checked: 2026-02-25 22:42:00 UTC
 - Quick-Test: `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog auth list --plain`
-- Result: UNVERIFIED
-- Error: Missing keyring environment context.
+- Result: SUCCESS
 - Update logic: If `aes.KeyUnwrap` or `no TTY available` appears, set status to UNVERIFIED (missing env), not BROKEN. Only set BROKEN if auth list fails with correct env injection.
+
+## Status (Audited)
+- **Evidence (sanitized):**
+  - `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog auth list --plain` → shows `admin@alphamindhub.com` with `drive,gmail`
+  - `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog drive ls --max=3 --plain --no-input --account admin@alphamindhub.com` → returns file rows
 
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
