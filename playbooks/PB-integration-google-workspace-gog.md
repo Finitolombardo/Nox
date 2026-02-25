@@ -1,76 +1,58 @@
 # PB-integration-google-workspace-gog.md
 
 ## Status
-- Status: BROKEN (non-interactive agentadmin check)
-- Last checked: 2026-02-25 21:16:50 UTC
-- Quick-Test: `sudo -u agentadmin gog drive ls --max=3 --plain --no-input --account admin@alphamindhub.com`
-- Result: FAILED
-- Error: `no TTY available for keyring file backend password prompt; set GOG_KEYRING_PASSWORD`
-- Evidence:
-  - `sudo -u agentadmin gog auth list --plain` -> same keyring password prompt error
-  - Drive command above failed with same error
+- Status: UNVERIFIED (non-interactive agentadmin check without env)
+- Last checked: 2026-02-25 22:32:00 UTC
+- Quick-Test: `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog auth list --plain`
+- Result: UNVERIFIED
+- Error: Missing keyring environment context.
+- Update logic: If `aes.KeyUnwrap` or `no TTY available` appears, set status to UNVERIFIED (missing env), not BROKEN. Only set BROKEN if auth list fails with correct env injection.
 
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
 - Gmail
 - Drive
 - Sheets
+- Calendar
+- Contacts
+- Docs
 
-## Quick-Tests
-### Gmail Quick-Test
-- Action: `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account <mail>`
-- Expected: success (empty result allowed)
+## Failure modes (non-issues)
+Do NOT report these as broken OAuth. They are expected environment missing errors in headless contexts:
+- `aes.KeyUnwrap(): integrity check failed` = wrong/missing `GOG_KEYRING_PASSWORD` or wrong `HOME`/`XDG` context.
+- `no TTY available...` = missing `GOG_KEYRING_PASSWORD` in headless run.
 
-### Drive Quick-Test
-- Action: `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account <mail>`
-- Expected: success
-
-## Known-good configuration (NO secrets)
-- credentials path: `/home/agentadmin/.config/gogcli/credentials.json`
-- account configured in gog auth store
-
-## Fix
-1) Put OAuth client JSON at `/home/agentadmin/.config/gogcli/credentials.json`
-2) `sudo -u agentadmin gog auth credentials /home/agentadmin/.config/gogcli/credentials.json`
-3) `sudo -u agentadmin gog auth add admin@alphamindhub.com --services gmail,drive,sheets`
-4) Re-run Gmail + Drive Quick-Tests
-
-## Update policy
-- Only set WORKING/BROKEN after tests run in this session.
-- If test not executed: set UNVERIFIED with exact reason.
-
-## Status (Audited)
-- Status: WORKING (agentadmin)
-- Last checked: 2026-02-25 20:12 UTC
-- Required:
-  - OAuth credentials type: **installed** (Desktop) in `/home/agentadmin/.config/gogcli/credentials.json`
-  - Keyring backend pinned: `gog auth keyring file`
-  - Non-interactive runs: set `GOG_KEYRING_PASSWORD` in environment (do not print it)
-- Root cause (previous failures):
-  - `redirect_uri_mismatch` due to using web/invalid creds for dynamic localhost callback
-  - `No tokens stored` because keyring backend was `auto` and config was not persisted (`config_exists false`)
-- Fix summary:
-  - Use installed creds → `gog auth credentials set ...`
-  - Pin keyring → `gog auth keyring file` (creates `config.json`, `config_exists true`)
-  - Complete OAuth consent via SSH tunnel for callback port
-- Evidence (sanitized):
-  - `gog auth status` → `config_exists true`, `keyring_backend file`
-  - `gog auth list --plain` shows `admin@alphamindhub.com` with services `drive,gmail`
-  - Gmail Quick-Test:
-    - `gog gmail search "newer_than:7d" --limit 3 --plain` → returns message rows (drafts shown)
-  - Drive Quick-Test:
-    - `gog drive ls --limit 3 --plain` → returns file rows
-
-## Quick-Tests
-- Auth list: `gog auth list --plain`
-- Gmail: `gog gmail search "newer_than:7d" --limit 3 --plain`
-- Drive: `gog drive ls --limit 3 --plain`
-
-## Headless invocation (required for automation)
+## Standard headless wrapper
 When running via sudo/CI (no TTY), always inject HOME/XDG + keyring password env:
+
+```bash
+sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog <command>
+```
 
 Example (Drive):
 `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog drive ls --max=3 --plain --no-input --account admin@alphamindhub.com`
 
 Example (Auth list):
 `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog auth list --plain`
+
+## Quick-Tests
+### Gmail Quick-Test
+- Action: `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog gmail search "in:inbox" --max=1 --json --no-input --account admin@alphamindhub.com`
+- Expected: success (empty result allowed)
+
+### Drive Quick-Test
+- Action: `sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog drive ls --max=1 --json --no-input --account admin@alphamindhub.com`
+- Expected: success
+
+## Known-good configuration (NO secrets)
+- credentials path: `/home/agentadmin/.config/gogcli/credentials.json`
+- OAuth credentials type: **installed** (Desktop)
+- Keyring backend pinned: `gog auth keyring file`
+- Non-interactive runs: set `GOG_KEYRING_PASSWORD` in environment (do not print it)
+
+## Fix (Initial Setup)
+1) Put OAuth client JSON at `/home/agentadmin/.config/gogcli/credentials.json`
+2) `sudo -u agentadmin gog auth credentials /home/agentadmin/.config/gogcli/credentials.json`
+3) `sudo -u agentadmin gog auth add admin@alphamindhub.com --services gmail,drive,sheets`
+4) Pin keyring: `gog auth keyring file`
+5) Re-run Quick-Tests with env injection.
