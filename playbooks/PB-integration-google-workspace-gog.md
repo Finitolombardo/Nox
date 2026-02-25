@@ -1,17 +1,14 @@
 # PB-integration-google-workspace-gog.md
 
 ## Status
-- Status: WORKING (agentadmin)
-- Last checked: 2026-02-25 20:12 UTC
-- Gmail Quick-Test (limit=1): `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED (historical pre-fix)
-- Drive Quick-Test (limit=1): `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED (historical pre-fix)
-- Historical note: previous runs failed before credentials+keyring were fixed.
+- Status: BROKEN (non-interactive agentadmin check)
+- Last checked: 2026-02-25 21:16:50 UTC
+- Quick-Test: `sudo -u agentadmin gog drive ls --max=3 --plain --no-input --account admin@alphamindhub.com`
+- Result: FAILED
+- Error: `no TTY available for keyring file backend password prompt; set GOG_KEYRING_PASSWORD`
 - Evidence:
-  - `gog auth status` => `config_exists true`, `keyring_backend file`
-  - `gog auth list --plain` shows `admin@alphamindhub.com` with `drive,gmail`
-  - Quick-Tests: `gog gmail search "newer_than:7d"` and `gog drive ls` succeeded under agentadmin
-  - `sudo -u agentadmin gog --help` shows config path `/home/agentadmin/.config/gogcli/config.json`
-  - `sudo -u agentadmin gog status --json --no-input` => `"credentials_exists": false (historical pre-fix)`
+  - `sudo -u agentadmin gog auth list --plain` -> same keyring password prompt error
+  - Drive command above failed with same error
 
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
