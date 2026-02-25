@@ -24,7 +24,7 @@ sleep 2
 ss -ltnp | grep 18791 || echo 'port free'
 
 # start as agentadmin in background
-sudo -u agentadmin nohup openclaw gateway run --port 18791 \
+sudo -u agentadmin nohup openclaw gateway --port 18791 --force
   > /home/agentadmin/openclaw-gateway.log 2>&1 &
 
 # verify process + port + health
