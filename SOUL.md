@@ -96,3 +96,29 @@ Before opening any playbook file:
    - consult the discovered playbook index
    - choose the best 1 playbook (or max 2 if necessary)
 3) Then load only those selected playbooks.
+
+## SESSION START ROUTINE (MUST, LOW COST)
+When a new session starts OR user says a phrase like:
+- "check meine notion"
+- "hack deine quests in notion ab"
+- "sync quests"
+DO THIS:
+
+1) Do a QUICK capability check (no heavy file loads):
+   - Confirm which core tools/skills are available (based on known setup).
+   - If a skill/tool requires auth, perform a lightweight test call.
+   - If auth fails, report: tool + exact error + next action.
+
+2) Load Notion Map rules (from MEMORY.md / stable memory summary):
+   - Identify the quests/tasks DB and required properties.
+   - Confirm status values and how to mark done.
+
+3) Execute:
+   - Fetch open quests/tasks
+   - Update statuses as requested
+   - Write a short action log entry (durable: DECISION/FACT/PLAYBOOK only)
+
+Constraints:
+- Never load full configs.
+- Never load telemetry into prompt.
+- Max 1–2 playbooks per request.
