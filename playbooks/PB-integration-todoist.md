@@ -1,27 +1,29 @@
 # PB-integration-todoist.md
 
 ## Status
-- Status: BROKEN
-- Last checked: 2026-02-25 17:53:00 UTC
-- Quick-Test: `todoist today`
-- Result: FAILED (not authenticated)
-- Error: `Error: Not authenticated. Run: todoist auth <your-api-token> or set TODOIST_API_TOKEN=<your-token>`
+- Status: WORKING
+- Last checked: 2026-02-25 17:54 UTC
+- Quick-Test:
+  - `todoist auth <token>`
+  - `todoist today`
+- Result: SUCCESS (task list returned)
 - Evidence:
-  - Skill installed: `/home/agentadmin/.openclaw/workspace/skills/todoist/SKILL.md`
-  - CLI installed: `npm install -g todoist-ts-cli@^0.2.0` completed successfully
+  - `✓ Token saved to /root/.config/todoist-cli/config.json`
+  - Output snippet from `todoist today`:
+    - `6g4pmCxr52rjMQR5  [48h Cash Sprint] ... (today)`
+    - `6g4pmF467CvhqXX5  [48h Cash Sprint] ... (today)`
 
 ## Quick-Test
 - List today's tasks: `todoist today`
 - Expected: task list output (or empty list without auth error)
 
 ## Known-good configuration (no secrets)
-- Required env: `TODOIST_API_TOKEN`
-- Alternative auth: `todoist auth <api-token>`
+- Auth file path (current runtime user): `/root/.config/todoist-cli/config.json`
+- Alternative env auth: `TODOIST_API_TOKEN`
 
-## Fix steps
-1) Generate API token: https://todoist.com/app/settings/integrations/developer
-2) Authenticate (one of):
-   - `todoist auth <your-api-token>`
-   - `export TODOIST_API_TOKEN=<your-token>`
-3) Re-run quick-test: `todoist today`
-4) If success, set Status=WORKING with timestamp and output snippet
+## If broken
+- `Error: Not authenticated.`
+Fix steps:
+1) Run `todoist auth <your-api-token>`
+2) Re-run `todoist today`
+3) If success, set Status=WORKING with timestamp and output snippet
