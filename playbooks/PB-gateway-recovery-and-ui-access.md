@@ -1,65 +1,36 @@
-# PB-gateway-recovery-and-ui-access.md
+# PB: Gateway Recovery and UI Access
 
-## Zweck
-Runbook für "Gateway wirkt offline / UI kommt nicht zurück" mit evidenzbasierter Recovery.
+Mission: Ensure the OpenClaw Gateway is stable, accessible via the UI, and persistent across reboots.
 
-## 1) Health Checks (read-only)
-```bash
-ps -ef | grep -E 'openclaw-gateway|openclaw .* gateway' | grep -v grep
-ss -ltnp | grep 18791 || true
-openclaw status
+## 1) Primary Operation (systemd)
+The gateway is managed as a systemd service. This is the preferred way to start/stop the process.
 
-tail -n 120 /home/agentadmin/openclaw-gateway.log
-tail -n 120 /tmp/openclaw/openclaw-$(date -u +%F).log 2>/dev/null || true
-tail -n 120 /tmp/openclaw-0/openclaw-$(date -u +%F).log 2>/dev/null || true
-```
+**Commands:**
+- Start: \systemctl start openclaw-gateway- Stop: \systemctl stop openclaw-gateway- Restart: \systemctl restart openclaw-gateway- Status: \systemctl status openclaw-gateway --no-pager -l
+**Emergency Only (Manual nohup):**
+Manual start via nohup is discouraged as it is not managed by the system and won't restart on crash/reboot.
+\sudo -u agentadmin nohup /usr/bin/openclaw gateway --port 18791 --force > /home/agentadmin/openclaw-gateway.log 2>&1 &
+## 2) Gateway Connection
+- UI URL: https://agent.getvoidra.com
+- Local Port: 18791 (127.0.0.1)
 
-## 2) Safe restart (manual, single instance)
-```bash
-# stop all existing gateway processes
-pkill -f 'openclaw.*gateway' || true
-sleep 2
-
-# verify port is free
-ss -ltnp | grep 18791 || echo 'port free'
-
-# start as agentadmin in background
-sudo -u agentadmin nohup openclaw gateway --port 18791 --force
-  > /home/agentadmin/openclaw-gateway.log 2>&1 &
-
-# verify process + port + health
-ps -ef | grep -E 'openclaw-gateway|openclaw .* gateway' | grep -v grep
-ss -ltnp | grep 18791
-tail -n 60 /home/agentadmin/openclaw-gateway.log
-openclaw status
-```
-
-## 3) UI access controls
-- `gateway.controlUi.allowedOrigins` must include the actual UI origin(s).
-- If behind reverse proxy, set `gateway.trustedProxies`.
-- After config changes: restart gateway and verify logs.
-
-Failure signatures:
-- `origin not allowed` -> allowedOrigins incomplete/wrong
-- `Proxy headers detected from untrusted address` -> trustedProxies missing
-- `unauthorized: gateway token mismatch` -> wrong UI token
+## 3) Failure signatures
+- \origin not allowed\ -> allowedOrigins incomplete/wrong
+- \Proxy headers detected from untrusted address\ -> trustedProxies missing
+- \unauthorized: gateway token mismatch\ -> wrong UI token
 
 ## 4) Permissions repair (workspace)
-```bash
+\\ash
 sudo chown -R agentadmin:agentadmin /home/agentadmin/.openclaw/workspace
 find /home/agentadmin/.openclaw/workspace -type d -exec chmod 755 {} \;
 find /home/agentadmin/.openclaw/workspace -type f -exec chmod 644 {} \;
-```
-
+\
 ## 5) Single source of truth rule
-- Operate gateway consistently as `agentadmin`.
-- Avoid mixed runtime state between `/root/.openclaw` and `/home/agentadmin/.openclaw`.
-- No parallel start loops from multiple shells/users.
+- Operate gateway consistently as \gentadmin\.
+- Use systemd service for persistence and stability.
+- Avoid parallel start loops from multiple shells/users.
 
-## 6) Verification checklist
-- [ ] Exactly one listener on `127.0.0.1:18791`
-- [ ] `openclaw status` shows gateway reachable
-- [ ] No new `origin not allowed` in logs
-- [ ] No new `token mismatch` in logs
-- [ ] No `EACCES` on workspace files
-- [ ] UI stays connected >2 minutes
+## 6) Verification checklist (Post-start Evidence)
+Run these to verify a healthy gateway:
+- [x] Service status active: \systemctl status openclaw-gateway- [x] Port listening: \lsof -nP -iTCP:18791 -sTCP:LISTEN- [x] Health check OK: \curl -sS -D- http://127.0.0.1:18791/health\ (Look for Title: OpenClaw Control)
+- [x] No orphaned processes: \ps -ef | grep openclaw | grep -v grep\ (Should only see systemd-managed process)
