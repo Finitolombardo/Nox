@@ -38,3 +38,30 @@ This playbook covers Google Workspace via the "gog" skill:
 ## Update policy
 - Only set WORKING/BROKEN after tests run in this session.
 - If test not executed: set UNVERIFIED with exact reason.
+
+## Status (Audited)
+- Status: WORKING (agentadmin)
+- Last checked: 2026-02-25
+- Required:
+  - OAuth credentials type: **installed** (Desktop) in `credentials.json`
+  - Keyring backend pinned: `gog auth keyring file`
+  - Non-interactive runs: set `GOG_KEYRING_PASSWORD` in environment (do not print it)
+- Root cause (previous failures):
+  - `redirect_uri_mismatch` due to using web/invalid creds for dynamic localhost callback
+  - `No tokens stored` because keyring backend was `auto` and config was not persisted (`config_exists false`)
+- Fix summary:
+  - Use installed creds → `gog auth credentials set ...`
+  - Pin keyring → `gog auth keyring file` (creates `config.json`, `config_exists true`)
+  - Complete OAuth consent via SSH tunnel for callback port
+- Evidence (sanitized):
+  - `gog auth status` → `config_exists true`, `keyring_backend file`
+  - `gog auth list --plain` shows `admin@alphamindhub.com` with services `drive,gmail`
+  - Gmail Quick-Test:
+    - `gog gmail search "newer_than:7d" --limit 3 --plain` → returns message rows (drafts shown)
+  - Drive Quick-Test:
+    - `gog drive ls --limit 3 --plain` → returns file rows
+
+## Quick-Tests
+- Auth list: `gog auth list --plain`
+- Gmail: `gog gmail search "newer_than:7d" --limit 3 --plain`
+- Drive: `gog drive ls --limit 3 --plain`
