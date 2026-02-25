@@ -65,3 +65,12 @@ This playbook covers Google Workspace via the "gog" skill:
 - Auth list: `gog auth list --plain`
 - Gmail: `gog gmail search "newer_than:7d" --limit 3 --plain`
 - Drive: `gog drive ls --limit 3 --plain`
+
+## Headless invocation (required for automation)
+When running via sudo/CI (no TTY), always inject HOME/XDG + keyring password env:
+
+Example (Drive):
+`sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog drive ls --max=3 --plain --no-input --account admin@alphamindhub.com`
+
+Example (Auth list):
+`sudo -u agentadmin env HOME=/home/agentadmin XDG_CONFIG_HOME=/home/agentadmin/.config GOG_KEYRING_PASSWORD="$GOG_KEYRING_PASSWORD" gog auth list --plain`
