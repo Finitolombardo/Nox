@@ -1,83 +1,65 @@
 # PB-gateway-recovery-and-ui-access.md
 
 ## Zweck
-Runbook für "Gateway wirkt offline / UI kommt nicht zurück" inkl. sicherem Restart und Drift-Prävention.
+Runbook für "Gateway wirkt offline / UI kommt nicht zurück" mit evidenzbasierter Recovery.
 
 ## 1) Health Checks (read-only)
 ```bash
-# Prozess + Port
 ps -ef | grep -E 'openclaw-gateway|openclaw .* gateway' | grep -v grep
 ss -ltnp | grep 18791 || true
-
-# OpenClaw Gesamtstatus
 openclaw status
 
-# Relevante Logs
 tail -n 120 /home/agentadmin/openclaw-gateway.log
 tail -n 120 /tmp/openclaw/openclaw-$(date -u +%F).log 2>/dev/null || true
 tail -n 120 /tmp/openclaw-0/openclaw-$(date -u +%F).log 2>/dev/null || true
 ```
 
-## 2) Safe Restart Procedure (single instance)
+## 2) Safe restart (manual, single instance)
 ```bash
-# 1) Graceful stop (service-managed)
-openclaw gateway stop
+# stop all existing gateway processes
+pkill -f 'openclaw.*gateway' || true
+sleep 2
 
-# 2) Verifizieren: nichts lauscht mehr auf 18791
-ss -ltnp | grep 18791 || echo "port free"
+# verify port is free
+ss -ltnp | grep 18791 || echo 'port free'
 
-# 3) Start
-openclaw gateway start
+# start as agentadmin in background
+sudo -u agentadmin nohup openclaw gateway run --port 18791 \
+  > /home/agentadmin/openclaw-gateway.log 2>&1 &
 
-# 4) Verify
-openclaw gateway status
+# verify process + port + health
+ps -ef | grep -E 'openclaw-gateway|openclaw .* gateway' | grep -v grep
+ss -ltnp | grep 18791
+tail -n 60 /home/agentadmin/openclaw-gateway.log
 openclaw status
-ss -ltnp | grep 18791
 ```
 
-### Wenn Port weiter belegt ist
+## 3) UI access controls
+- `gateway.controlUi.allowedOrigins` must include the actual UI origin(s).
+- If behind reverse proxy, set `gateway.trustedProxies`.
+- After config changes: restart gateway and verify logs.
+
+Failure signatures:
+- `origin not allowed` -> allowedOrigins incomplete/wrong
+- `Proxy headers detected from untrusted address` -> trustedProxies missing
+- `unauthorized: gateway token mismatch` -> wrong UI token
+
+## 4) Permissions repair (workspace)
 ```bash
-# PID identifizieren und nur den verwaisten Prozess beenden
-ss -ltnp | grep 18791
-kill <PID>
-# dann erneut openclaw gateway start
-```
-
-## 3) allowedOrigins + trustedProxies
-- Setze `gateway.controlUi.allowedOrigins` auf die tatsächlich genutzte(n) UI-Origin(s).
-- Setze `gateway.trustedProxies` wenn Reverse Proxy Header liefert.
-- Nach Änderung: Gateway neu starten.
-
-Prüfen in Logs:
-- `origin not allowed` → allowedOrigins fehlt/falsch
-- `Proxy headers detected from untrusted address` → trustedProxies fehlt
-
-## 4) Permissions Repair (workspace)
-```bash
-# Ownership auf agentadmin korrigieren (keine Secrets ausgeben)
 sudo chown -R agentadmin:agentadmin /home/agentadmin/.openclaw/workspace
-
-# Sinnvolle Rechte (Dateien 644, Verzeichnisse 755)
 find /home/agentadmin/.openclaw/workspace -type d -exec chmod 755 {} \;
 find /home/agentadmin/.openclaw/workspace -type f -exec chmod 644 {} \;
 ```
 
-## 5) Single Source of Truth (no root .openclaw drift)
-- Gateway dauerhaft als **agentadmin** betreiben.
-- Keine gemischten Runtime-Pfade zwischen `/root/.openclaw` und `/home/agentadmin/.openclaw`.
-- Keine parallelen manuellen Starts in verschiedenen Shells/Users.
+## 5) Single source of truth rule
+- Operate gateway consistently as `agentadmin`.
+- Avoid mixed runtime state between `/root/.openclaw` and `/home/agentadmin/.openclaw`.
+- No parallel start loops from multiple shells/users.
 
-## 6) Verification Checklist (must pass)
-- [ ] Nur **ein** Listener auf `127.0.0.1:18791`.
-- [ ] `openclaw status` zeigt Gateway reachable + service running.
-- [ ] Keine neuen `origin not allowed` Fehler im Log.
-- [ ] Keine neuen `token mismatch` Fehler im Log.
-- [ ] Keine `EACCES` Fehler auf Workspace-Dateien.
-- [ ] UI kann verbinden und bleibt stabil (>2 min ohne reconnect loop).
-
-## 7) Known failure signatures
-- `another gateway instance is already listening` → Doppelstart/Port-Konflikt
-- `origin not allowed` → allowedOrigins-Konfiguration fehlt/falsch
-- `unauthorized: gateway token mismatch` → falscher Token im UI
-- `EACCES ... workspace/*.md` → Datei-Besitz/Rechte fehlerhaft
-- `SIGINT/SIGTERM` kurz nach Start → manuelles/externes Stop-Signal
+## 6) Verification checklist
+- [ ] Exactly one listener on `127.0.0.1:18791`
+- [ ] `openclaw status` shows gateway reachable
+- [ ] No new `origin not allowed` in logs
+- [ ] No new `token mismatch` in logs
+- [ ] No `EACCES` on workspace files
+- [ ] UI stays connected >2 minutes

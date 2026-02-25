@@ -2,48 +2,39 @@
 
 ## Status
 - Status: BROKEN
-- Last checked: 2026-02-25 17:11:52 UTC
-- Gmail Quick-Test (limit=1): `gog gmail search "in:inbox" --max=1 --json --no-input` -> FAILED
-- Drive Quick-Test (limit=1): `gog drive ls --max=1 --json --no-input` -> FAILED
-- Error (both): `token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.`
-- Likely cause: Token/keyring/config drift (current gog config path resolves to `/root/.config/gogcli`, not agentadmin profile)
-- Evidence: `gog status --json --no-input` shows credentials_path `/root/.config/gogcli/credentials.json` (2026-02-25 17:11 UTC)
-- Fix:
-  1) Run gog under the intended user profile consistently (agentadmin)
-  2) Re-auth that profile (`gog auth add <account> --services gmail,drive,sheets`)
-  3) Re-run the two Quick-Tests above
+- Last checked: 2026-02-25 17:19:57 UTC
+- Gmail Quick-Test (limit=1): `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED
+- Drive Quick-Test (limit=1): `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED
+- Error (both): `OAuth client credentials missing (OAuth client ID JSON)... expected at /home/agentadmin/.config/gogcli/credentials.json`
+- Evidence:
+  - `sudo -u agentadmin gog --help` shows config path `/home/agentadmin/.config/gogcli/config.json`
+  - `sudo -u agentadmin gog status --json --no-input` => `"credentials_exists": false`
+
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
 - Gmail
 - Drive
 - Sheets
-(Optionally: Calendar, Contacts, Docs if enabled)
 
-## Quick-Tests (pick the minimum needed)
+## Quick-Tests
 ### Gmail Quick-Test
-- Action: list/search INBOX (limit=1)
-- Expected: success (even empty results are ok)
+- Action: `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account <mail>`
+- Expected: success (empty result allowed)
 
 ### Drive Quick-Test
-- Action: list 1 item in Drive root (limit=1)
-- Expected: success
-
-### Sheets Quick-Test
-- Action: read sheet metadata OR read 1 cell range (limit=1)
+- Action: `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account <mail>`
 - Expected: success
 
 ## Known-good configuration (NO secrets)
-- Skill: gog (steipete)
-- OAuth profile label: (fill after success)
-- Required scopes: (fill after success)
-- Project requirement: if errors mention project/quota, set GOOGLE_CLOUD_PROJECT or GOOGLE_CLOUD_PROJECT_ID
+- credentials path: `/home/agentadmin/.config/gogcli/credentials.json`
+- account configured in gog auth store
 
-## If broken (common)
-- OAuth expired: re-login OAuth
-- 403 scope missing: re-auth with correct scopes
-- Project/quota error: set GOOGLE_CLOUD_PROJECT(_ID)
-- 404 file/sheet id: wrong ID
+## Fix
+1) Put OAuth client JSON at `/home/agentadmin/.config/gogcli/credentials.json`
+2) `sudo -u agentadmin gog auth credentials /home/agentadmin/.config/gogcli/credentials.json`
+3) `sudo -u agentadmin gog auth add admin@alphamindhub.com --services gmail,drive,sheets`
+4) Re-run Gmail + Drive Quick-Tests
 
 ## Update policy
-- On success: set Status=WORKING, Last checked=timestamp, note which test passed.
-- On failure: set Status=BROKEN, include exact error, write INCIDENT to memory (short).
+- Only set WORKING/BROKEN after tests run in this session.
+- If test not executed: set UNVERIFIED with exact reason.

@@ -2,14 +2,14 @@
 
 ## Status
 - Status: UNVERIFIED
-- Last checked: 2026-02-25 17:11:52 UTC
-- Quick-Test: Not possible in this runtime (no Todoist CLI/tool endpoint available for limit=5 task list)
-- Result: Could not execute API call; status set to UNVERIFIED until a live query is run
-- Evidence: `which todoist` -> not found (command output, 2026-02-25 17:11 UTC)
+- Last checked: 2026-02-25 17:19:57 UTC
+- Quick-Test: NOT RUN (no Todoist execution tool available in this agent runtime)
+- Reason: this session tool registry has no Todoist tool endpoint; `openclaw status --deep | grep -Ei 'notion|todoist|gog'` returned no Todoist tool entry
+- Result: keep UNVERIFIED until a live Todoist API call (limit=5) is executed
 
 ## Quick-Test
 - List 5 active tasks (limit=5)
-- Expected: HTTP 200 + array
+- Expected: success response (HTTP 200 equivalent)
 
 ## Known-good configuration (no secrets)
 - Account/email: (optional)
