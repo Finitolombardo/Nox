@@ -43,7 +43,7 @@ This playbook covers Google Workspace via the "gog" skill:
 - Status: WORKING (agentadmin)
 - Last checked: 2026-02-25
 - Required:
-  - OAuth credentials type: **installed** (Desktop) in `credentials.json`
+  - OAuth credentials type: **installed** (Desktop) in `/home/agentadmin/.config/gogcli/credentials.json`
   - Keyring backend pinned: `gog auth keyring file`
   - Non-interactive runs: set `GOG_KEYRING_PASSWORD` in environment (do not print it)
 - Root cause (previous failures):
