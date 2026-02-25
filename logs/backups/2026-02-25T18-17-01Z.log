@@ -1,1 +1,31 @@
 [2026-02-25T18:17:01Z] backup start
+[main 0ad3beb] Auto-backup snapshot 2026-02-25T18-17-01Z
+ 7 files changed, 24 insertions(+), 2 deletions(-)
+ create mode 100644 logs/backups/2026-02-25T18-17-01Z.log
+ create mode 100644 logs/backups/workspace-backup-2026-02-25T17-17-01Z.tar.gz
+ create mode 100644 memory/backup-alert.flag
+To https://github.com/Finitolombardo/Nox.git
+   9bc2301..0ad3beb  main -> main
+git push ok
+archive created: /home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-02-25T18-17-01Z.tar.gz
+No auth for drive admin@alphamindhub.com.
+
+OAuth (browser flow):
+  gog auth add admin@alphamindhub.com --services drive
+
+Workspace service account (domain-wide delegation):
+  gog auth service-account set admin@alphamindhub.com --key <service-account.json>
+No auth for drive admin@alphamindhub.com.
+
+OAuth (browser flow):
+  gog auth add admin@alphamindhub.com --services drive
+
+Workspace service account (domain-wide delegation):
+  gog auth service-account set admin@alphamindhub.com --key <service-account.json>
+No auth for drive admin@alphamindhub.com.
+
+OAuth (browser flow):
+  gog auth add admin@alphamindhub.com --services drive
+
+Workspace service account (domain-wide delegation):
+  gog auth service-account set admin@alphamindhub.com --key <service-account.json>
