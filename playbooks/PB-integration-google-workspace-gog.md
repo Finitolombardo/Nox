@@ -1,14 +1,17 @@
 # PB-integration-google-workspace-gog.md
 
 ## Status
-- Status: BROKEN
-- Last checked: 2026-02-25 17:19:57 UTC
-- Gmail Quick-Test (limit=1): `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED
-- Drive Quick-Test (limit=1): `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED
-- Error (both): `OAuth client credentials missing (OAuth client ID JSON)... expected at /home/agentadmin/.config/gogcli/credentials.json`
+- Status: WORKING (agentadmin)
+- Last checked: 2026-02-25 20:12 UTC
+- Gmail Quick-Test (limit=1): `sudo -u agentadmin gog gmail search "in:inbox" --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED (historical pre-fix)
+- Drive Quick-Test (limit=1): `sudo -u agentadmin gog drive ls --max=1 --json --no-input --account admin@alphamindhub.com` -> FAILED (historical pre-fix)
+- Historical note: previous runs failed before credentials+keyring were fixed.
 - Evidence:
+  - `gog auth status` => `config_exists true`, `keyring_backend file`
+  - `gog auth list --plain` shows `admin@alphamindhub.com` with `drive,gmail`
+  - Quick-Tests: `gog gmail search "newer_than:7d"` and `gog drive ls` succeeded under agentadmin
   - `sudo -u agentadmin gog --help` shows config path `/home/agentadmin/.config/gogcli/config.json`
-  - `sudo -u agentadmin gog status --json --no-input` => `"credentials_exists": false`
+  - `sudo -u agentadmin gog status --json --no-input` => `"credentials_exists": false (historical pre-fix)`
 
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
@@ -41,7 +44,7 @@ This playbook covers Google Workspace via the "gog" skill:
 
 ## Status (Audited)
 - Status: WORKING (agentadmin)
-- Last checked: 2026-02-25
+- Last checked: 2026-02-25 20:12 UTC
 - Required:
   - OAuth credentials type: **installed** (Desktop) in `/home/agentadmin/.config/gogcli/credentials.json`
   - Keyring backend pinned: `gog auth keyring file`
