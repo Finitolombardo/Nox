@@ -1,40 +1,10 @@
-# TOOLS.md - Local Notes
+# TOOLS (LEAN)
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+- Use tools only when needed.
+- Prefer minimal tool calls.
+- When using external services (Google/Notion/etc), verify auth errors and report the exact failing step.
 
-## What Goes Here
-
-Things like:
-
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
-
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+Rules:
+1) Never assume access works. If a tool returns auth/permission error, stop and report: tool name + error.
+2) Do not read large files unless explicitly necessary.
+3) For file retrieval: use PLAYBOOK_INDEX.md first, then load only the referenced file.
