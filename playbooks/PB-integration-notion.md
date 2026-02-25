@@ -1,8 +1,11 @@
 # PB-integration-notion.md
 
 ## Status
-- Status: UNKNOWN
-- Last checked: -
+- Status: UNVERIFIED
+- Last checked: 2026-02-25 17:11:52 UTC
+- Quick-Test: Not possible in this runtime (no Notion CLI/tool endpoint available for a limit=1 query)
+- Result: Could not execute API call; status set to UNVERIFIED until a live query is run
+- Evidence: `which notion` -> not found (command output, 2026-02-25 17:11 UTC)
 
 ## What "working" means (Quick-Test)
 - Query: fetch 1 item from Quest/Tasks DB (limit=1)

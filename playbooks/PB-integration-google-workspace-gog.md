@@ -2,12 +2,16 @@
 
 ## Status
 - Status: BROKEN
-- Last checked: 2026-02-25 16:21 UTC
-- Gmail Quick-Test (limit=1): `gog gmail search 'in:inbox' --max 1 --json --no-input` → FAIL (`read token: aes.KeyUnwrap(): integrity check failed`)
-- Drive Quick-Test (limit=1): `gog drive search '*' --max 1 --json --no-input` → FAIL (`read token: aes.KeyUnwrap(): integrity check failed`)
-- Likely cause: corrupted/unreadable local gog OAuth token store for account `admin@alphamindhub.com`
-- Fix: re-auth gog (`gog auth list`, then `gog auth add admin@alphamindhub.com --services gmail,drive`), retry tests
-
+- Last checked: 2026-02-25 17:11:52 UTC
+- Gmail Quick-Test (limit=1): `gog gmail search "in:inbox" --max=1 --json --no-input` -> FAILED
+- Drive Quick-Test (limit=1): `gog drive ls --max=1 --json --no-input` -> FAILED
+- Error (both): `token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.`
+- Likely cause: Token/keyring/config drift (current gog config path resolves to `/root/.config/gogcli`, not agentadmin profile)
+- Evidence: `gog status --json --no-input` shows credentials_path `/root/.config/gogcli/credentials.json` (2026-02-25 17:11 UTC)
+- Fix:
+  1) Run gog under the intended user profile consistently (agentadmin)
+  2) Re-auth that profile (`gog auth add <account> --services gmail,drive,sheets`)
+  3) Re-run the two Quick-Tests above
 ## Scope
 This playbook covers Google Workspace via the "gog" skill:
 - Gmail

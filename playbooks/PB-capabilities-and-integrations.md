@@ -90,3 +90,9 @@ When a Quick-Test fails:
 
 Never paste secrets into playbooks.
 Keep updates minimal (<= 10 lines per event).
+
+## 6) Audit snapshot (2026-02-25 17:11:52 UTC)
+- Notion: UNVERIFIED (Quick-Test unavailable; `which notion` not found)
+- Todoist: UNVERIFIED (Quick-Test unavailable; `which todoist` not found)
+- Google Workspace (gog): BROKEN (`aes.KeyUnwrap(): integrity check failed` in Gmail/Drive quick-tests)
+- Model check: gateway runtime line shows `agent model: openai-codex/gpt-5.3-codex`
