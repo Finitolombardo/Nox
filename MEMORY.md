@@ -131,4 +131,4 @@ For each skill, maintain:
 - quick test (limit=1):
 - auth required (yes/no):
 - common failure + fix:
-- related playbook path:
+- related playbook path:- PLAYBOOK: /home/agentadmin/.openclaw/workspace/playbooks/PB-mission-control-dashboard-ops.md (2026-02-26) - SOP for Mission Control, Gateway, Agents stability and recovery.
