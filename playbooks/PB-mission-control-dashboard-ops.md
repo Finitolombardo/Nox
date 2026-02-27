@@ -70,7 +70,7 @@ Hinweis: DB-Neuanlage bedeutet: MC Daten sind leer (Boards/Agents/Gateways neu a
 ### 2) Agents stuck “PROVISIONING” / OFFLINE
 Ursachen:
 - Templates sync hat keine gültigen AUTH_TOKEN in TOOLS.md
-- BASE_URL Platzhalter in Workspaces (REPLACE_WITH_BASE_URL)
+- BASE_URL Platzhalter in Workspaces (https://mc.getvoidra.com/api)
 - Token mismatch (rotated, aber Workspace/Agent noch alt)
 Fix (robust):
 1) Templates sync lokal ohne nginx timeout:
@@ -78,7 +78,7 @@ Fix (robust):
      -H "Authorization: Bearer <LOCAL_AUTH_TOKEN>"
 2) BASE_URL Platzhalter entfernen in allen Workspace markdowns:
    - find /home/agentadmin/.openclaw/workspace-* -type f -name "*.md" -print0 \
-     | xargs -0 sed -i 's|REPLACE_WITH_BASE_URL|https://mc.getvoidra.com/api|g'
+     | xargs -0 sed -i 's|https://mc.getvoidra.com/api|https://mc.getvoidra.com/api|g'
 3) Presence/Last-seen forcieren:
    - Token aus passendem workspace-*/TOOLS.md holen (AUTH_TOKEN)
    - curl -H "X-Agent-Token: <AUTH_TOKEN>" https://mc.getvoidra.com/api/api/v1/agent/boards
@@ -133,7 +133,7 @@ Fix:
 4) templates/sync lokal:
    - rotate_tokens=true & reset_sessions=true
 5) Placeholder scrub:
-   - replace REPLACE_WITH_BASE_URL in workspace-*.md
+   - replace https://mc.getvoidra.com/api in workspace-*.md
 6) Presence ping Lead + Worker + Gateway Agent:
    - X-Agent-Token -> /api/api/v1/agent/boards
 
