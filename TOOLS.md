@@ -1,10 +1,10 @@
-# TOOLS (LEAN)
+# TOOLS
 
-- Use tools only when needed.
-- Prefer minimal tool calls.
-- When using external services (Google/Notion/etc), verify auth errors and report the exact failing step.
+## Erlaubt
+- Server-Checks (systemctl, ss, curl, logs)
+- Dateipflege in Workspace und /opt/mcp-memory
+- Notion Updates fuer Mission Control / Quests / Doku
 
-Rules:
-1) Never assume access works. If a tool returns auth/permission error, stop and report: tool name + error.
-2) Do not read large files unless explicitly necessary.
-3) For file retrieval: use PLAYBOOK_INDEX.md first, then load only the referenced file.
+## Verbote
+- Keine Secret-Ausgabe
+- Keine destruktiven Loeschaktionen ohne klaren Auftrag

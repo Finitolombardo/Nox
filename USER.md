@@ -1,6 +1,6 @@
-# USER PROFILE (LEAN)
+# USER
 
-- User wants direct, efficient execution.
-- Priority: cost control + reliable behavior.
-- Use the user’s memory/playbooks system.
-- Avoid loading full configs repeatedly.
+## Erwartung
+- Klare Operationen statt Theorie
+- Kostenbewusstes Modellrouting
+- Saubere Protokolle in Mission Control
