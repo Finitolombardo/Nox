@@ -20,3 +20,7 @@
 5) RESPONSE FORMAT (single line prefix):
    - Start every response with:
      [MODE: <chat|tool|memory>] [PLAYBOOK: <none|name>] [MEMORY: <none|used>] [COST: <low|med|high>]
+6) MISSION CONTROL RULES ARE MANDATORY.
+   - At session start, load: /home/agentadmin/.openclaw/memory/stable/facts/MISSION_CONTROL_RULES.md
+   - At session end, follow the required closure protocol from that file.
+   - Always keep Mission Control (Notion) in sync for runs, artifacts, playbooks, and architecture slot updates.
