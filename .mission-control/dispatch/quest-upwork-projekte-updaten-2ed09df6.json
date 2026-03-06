@@ -1,0 +1,17 @@
+{
+  "quest_id": "2ed09df6-e88e-802d-971c-e3dfc9eaaf08",
+  "title": "Upwork Projekte updaten",
+  "responsible": "Archon",
+  "assigned_role": "Archon",
+  "status": "In Arbeit",
+  "type": "Umsatz",
+  "priority": 2,
+  "subtasks": [],
+  "notion_url": "https://www.notion.so/Upwork-Projekte-updaten-2ed09df6e88e802d971ce3dfc9eaaf08",
+  "routed_to": "Archon",
+  "routed_agent_key": "archon",
+  "routing_reason": "fallback routing to Archon for unclassified quest",
+  "routing_source": "content_routing",
+  "created_at": "2026-03-06T22:59:06.226Z",
+  "run_id": "quest-dispatch-2ed09df6-mmfhxsnv"
+}

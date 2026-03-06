@@ -1,0 +1,11 @@
+{
+  "questId": "31b09df6-e88e-81a6-bf60-d53d078fae96",
+  "status": "processing",
+  "attempts": 1,
+  "lockedAt": "2026-03-06T22:59:34.452Z",
+  "updatedAt": "2026-03-06T22:59:34.452Z",
+  "agentKey": "archon",
+  "agentName": "Archon",
+  "inputJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-bolt-verbinden-mission-control-dashboard-polish-31b09df6.json",
+  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-bolt-verbinden-mission-control-dashboard-polish-31b09df6.md"
+}

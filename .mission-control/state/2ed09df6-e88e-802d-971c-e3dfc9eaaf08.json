@@ -1,0 +1,11 @@
+{
+  "questId": "2ed09df6-e88e-802d-971c-e3dfc9eaaf08",
+  "status": "processing",
+  "attempts": 1,
+  "lockedAt": "2026-03-06T23:16:44.741Z",
+  "updatedAt": "2026-03-06T23:16:44.741Z",
+  "agentKey": "archon",
+  "agentName": "Archon",
+  "inputJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-upwork-projekte-updaten-2ed09df6.json",
+  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-upwork-projekte-updaten-2ed09df6.md"
+}
