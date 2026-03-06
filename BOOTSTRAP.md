@@ -9,7 +9,7 @@
    - Status/Core/Workspace/Modelle/Provider: OpenClaw-Runtime + Workspace-Dateien
    - Memory: MCP
    - Quests, Agent Runs, Artifacts: Notion
-   - Playbooks: MCP + PLAYBOOK_INDEX.md; kein dedizierter Notion-Playbook-Mirror
+   - Playbooks: MCP + Workspace/PLAYBOOK_INDEX bleiben Ursprung; Notion-Playbook-DB ist Mirror
    - Archivarius mappt im Dashboard auf kelthuzad
 
 ## Session Ende
