@@ -1,0 +1,28 @@
+{
+  "questId": "31b09df6-e88e-801f-ab2b-dd573878397d",
+  "status": "review_pending",
+  "attempts": 2,
+  "lockedAt": "2026-03-06T23:37:22.671Z",
+  "updatedAt": "2026-03-06T23:38:21.665Z",
+  "agentKey": "archon",
+  "agentName": "Archon",
+  "inputJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6.json",
+  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6.md",
+  "runId": "quest-worker-31b09df6-mmfjb20i",
+  "summary": "### 1. Outcome **Sub-missions Outlined.** A high-level breakdown of the \"Transcripts Frontend V1\" implementation into specific subtasks has been drafted, alongside proposed agent assignments for execution. ### 2. Work Completed - Analyze...",
+  "resultJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.result.json",
+  "resultMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.result.md",
+  "report": {
+    "ok": true,
+    "artifact": {
+      "ok": true,
+      "id": "31b09df6-e88e-81a1-97f2-ea4f524cf98b",
+      "url": "https://www.notion.so/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5-result-md-31b09df6e88e81a197f2ea4f524cf98b"
+    },
+    "run": {
+      "ok": true,
+      "id": "31b09df6-e88e-8132-a3c0-fc72f72d7bae"
+    },
+    "questStatusAfter": "In Arbeit"
+  }
+}

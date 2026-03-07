@@ -1,0 +1,17 @@
+{
+  "quest_id": "31b09df6-e88e-801f-ab2b-dd573878397d",
+  "title": "Transcripts Frontend V1 in Teilmissionen zerlegen",
+  "responsible": "Archon",
+  "assigned_role": "Archon",
+  "status": "In Arbeit",
+  "status_target": "In Arbeit",
+  "subtasks": [],
+  "notes": "Zerlege die Umsetzung in Unteraufgaben und schlage Agentenzuweisungen vor.",
+  "notion_url": "https://www.notion.so/Transcripts-Frontend-V1-in-Teilmissionen-zerlegen-31b09df6e88e801fab2bdd573878397d",
+  "routed_to": "Archon",
+  "routed_agent_key": "archon",
+  "routing_reason": "existing Verantwortlicher maps to active agent",
+  "routing_source": "responsible",
+  "created_at": "2026-03-06T23:33:49.948Z",
+  "run_id": "quest-dispatch-31b09df6-mmfj6gih"
+}

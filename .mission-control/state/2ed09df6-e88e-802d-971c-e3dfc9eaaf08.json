@@ -1,11 +1,28 @@
 {
   "questId": "2ed09df6-e88e-802d-971c-e3dfc9eaaf08",
-  "status": "processing",
+  "status": "review_pending",
   "attempts": 1,
   "lockedAt": "2026-03-06T23:16:44.741Z",
-  "updatedAt": "2026-03-06T23:16:44.741Z",
+  "updatedAt": "2026-03-06T23:18:41.121Z",
   "agentKey": "archon",
   "agentName": "Archon",
   "inputJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-upwork-projekte-updaten-2ed09df6.json",
-  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-upwork-projekte-updaten-2ed09df6.md"
+  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-upwork-projekte-updaten-2ed09df6.md",
+  "runId": "quest-worker-2ed09df6-mmfikitk",
+  "summary": "### 1. Outcome **Blocked / Manual Execution Required.** The quest \"Upwork Projekte updaten\" lacks specific context, notes, or subtasks detailing which projects need updating, what the updates entail, or what the desired outcome is. ### 2...",
+  "resultJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.result.json",
+  "resultMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.result.md",
+  "report": {
+    "ok": true,
+    "artifact": {
+      "ok": true,
+      "id": "31b09df6-e88e-81fa-8732-da74c6bc49df",
+      "url": "https://www.notion.so/upwork-projekte-updaten-2ed09df6-mmfin0m9-result-md-31b09df6e88e81fa8732da74c6bc49df"
+    },
+    "run": {
+      "ok": true,
+      "id": "31b09df6-e88e-816c-ad7b-e0a0b321f75d"
+    },
+    "questStatusAfter": "In Arbeit"
+  }
 }
