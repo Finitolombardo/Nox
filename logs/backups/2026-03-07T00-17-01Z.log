@@ -1,1 +1,22 @@
 [2026-03-07T00:17:01Z] backup start
+[main b1d0477] Auto-backup snapshot 2026-03-07T00-17-01Z
+ 17 files changed, 920 insertions(+), 7 deletions(-)
+ create mode 100644 .mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.input.json
+ create mode 100644 .mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.input.md
+ create mode 100644 .mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.result.json
+ create mode 100644 .mission-control/archive/transcripts-frontend-v1-in-teilmissionen-zerlege-31b09df6-mmfjcbj5.result.md
+ rename .mission-control/{dispatch/quest-upwork-projekte-updaten-2ed09df6.json => archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.input.json} (100%)
+ rename .mission-control/{dispatch/quest-upwork-projekte-updaten-2ed09df6.md => archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.input.md} (100%)
+ create mode 100644 .mission-control/archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.result.json
+ create mode 100644 .mission-control/archive/upwork-projekte-updaten-2ed09df6-mmfin0m9.result.md
+ delete mode 100644 .mission-control/state/2ed09df6-e88e-802d-971c-e3dfc9eaaf08.lock
+ create mode 100644 .mission-control/state/31b09df6-e88e-801f-ab2b-dd573878397d.json
+ create mode 100644 logs/backups/2026-03-07T00-17-01Z.log
+ create mode 100644 logs/backups/workspace-backup-2026-03-06T23-17-01Z.tar.gz
+To https://github.com/Finitolombardo/Nox.git
+   afb5b13..b1d0477  main -> main
+git push ok
+archive created: /home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-03-07T00-17-01Z.tar.gz
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
