@@ -1,11 +1,11 @@
 # PB-integration-notion.md
 
 ## Status
-- Status: UNVERIFIED
-- Last checked: 2026-02-25 17:19:57 UTC
-- Quick-Test: NOT RUN (no Notion execution tool available in this agent runtime)
-- Reason: this session tool registry has no Notion tool endpoint; `openclaw status --deep | grep -Ei 'notion|todoist|gog'` returned no Notion tool entry
-- Result: keep UNVERIFIED until a live Notion API call (limit=1) is executed
+- Status: WORKING
+- Last checked: 2026-03-07 17:35:00 UTC
+- Quick-Test: SUCCESS (verified API connection and Database properties)
+- Reason: Notion API Key and Database ID found in environment variables. Successfully created 3 Quests.
+- Result: WORKING
 
 ## What "working" means (Quick-Test)
 - Query: fetch 1 item from Quest/Tasks DB (limit=1)
