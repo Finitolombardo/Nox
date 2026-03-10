@@ -1,1 +1,13 @@
 [2026-03-10T12:17:01Z] backup start
+[main eba9203] Auto-backup snapshot 2026-03-10T12-17-01Z
+ 5 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 logs/backups/2026-03-10T12-17-01Z.log
+ create mode 100644 logs/backups/workspace-backup-2026-03-10T11-17-01Z.tar.gz
+To https://github.com/Finitolombardo/Nox.git
+   4dce3f9..eba9203  main -> main
+git push ok
+archive created: /home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-03-10T12-17-01Z.tar.gz
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+jq: error: writing output failed: No space left on device
