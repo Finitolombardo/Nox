@@ -29,7 +29,7 @@
     "lastSuccessUtc": "2026-02-25T16:17:06Z",
     "lastArchive": "/home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-02-25T16-17-01Z.tar.gz",
     "status": "ok",
-    "lastFailureUtc": "2026-03-11T18:17:03Z",
-    "lastFailure": "backup failed (code=1) at 2026-03-11T18:17:03Z; see /home/agentadmin/.openclaw/workspace/logs/backups/2026-03-11T18-17-01Z.log"
+    "lastFailureUtc": "2026-03-11T19:17:04Z",
+    "lastFailure": "backup failed (code=1) at 2026-03-11T19:17:04Z; see /home/agentadmin/.openclaw/workspace/logs/backups/2026-03-11T19-17-01Z.log"
   }
 }
