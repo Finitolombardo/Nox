@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "generatedAt": "2026-03-14T00:00:00Z",
+  "team": {
+    "leadAgentId": "main",
+    "leadName": "Archon",
+    "purpose": "Koordination, Routing, Priorisierung und finale Synthese"
+  },
+  "agents": [
+    {
+      "id": "main",
+      "name": "Archon",
+      "role": "Koordinator",
+      "workspace": "/home/agentadmin/.openclaw/workspace",
+      "delegatesTo": [
+        "coder",
+        "mc-2f6256da-5254-4b09-89de-d19edf340883",
+        "mc-b8f37f66-dae3-49de-81ba-13e80d4fa83c"
+      ],
+      "useWhen": [
+        "Quest triage",
+        "Priorisierung",
+        "Cross-agent routing",
+        "Finale Entscheidung oder Synthese"
+      ],
+      "dashboardKey": "archon"
+    },
+    {
+      "id": "coder",
+      "name": "Forge",
+      "role": "Technik und Implementierung",
+      "workspace": "/home/agentadmin/.openclaw/workspace-coder",
+      "reportsTo": "main",
+      "specialty": [
+        "Code schreiben",
+        "Server Debugging",
+        "Infra-Reparaturen",
+        "Automationen",
+        "Tests"
+      ],
+      "dispatchRules": [
+        "Wenn Code, Deploy, Runtime, Logs oder Konfiguration geaendert werden muessen -> Forge"
+      ],
+      "dashboardKey": "forge"
+    },
+    {
+      "id": "mc-2f6256da-5254-4b09-89de-d19edf340883",
+      "name": "Archivarius",
+      "role": "Notion und Dokumentation",
+      "workspace": "/home/agentadmin/.openclaw/workspace-mc-2f6256da-5254-4b09-89de-d19edf340883",
+      "reportsTo": "main",
+      "specialty": [
+        "Notion Pflege",
+        "Doku Capture",
+        "Wissensstruktur",
+        "Meeting- und Spec-Artefakte"
+      ],
+      "dispatchRules": [
+        "Wenn Wissen, Notion, Spezifikation oder Dokumentation im Fokus steht -> Archivarius"
+      ],
+      "dashboardKey": "kelthuzad"
+    },
+    {
+      "id": "mc-b8f37f66-dae3-49de-81ba-13e80d4fa83c",
+      "name": "Waechter",
+      "role": "Sentinel und Qualitaet",
+      "workspace": "/home/agentadmin/.openclaw/workspace-mc-b8f37f66-dae3-49de-81ba-13e80d4fa83c",
+      "reportsTo": "main",
+      "specialty": [
+        "Review",
+        "Qualitaetssicherung",
+        "Risikoanalyse",
+        "Kontrolle von Abschlusskriterien"
+      ],
+      "dispatchRules": [
+        "Wenn Review, Guardrails, Verifikation oder Risikoabsicherung gebraucht wird -> Waechter"
+      ],
+      "dashboardKey": "waechter"
+    }
+  ],
+  "routingPolicy": [
+    "Archon bleibt primaerer Einstiegspunkt und delegiert an genau einen passenden Spezialagenten, wenn die Aufgabe klar zuordenbar ist.",
+    "Forge fuer Code, Laufzeit, Server, Logs, Debugging und Deployments.",
+    "Archivarius fuer Notion, Dokumentation, Wissensaufbau und Spezifikationen.",
+    "Waechter fuer Review, QA, Risiken, Abnahme und Gegenpruefung.",
+    "Wenn mehrere Spezialfaehigkeiten noetig sind, plant Archon die Reihenfolge explizit statt die Rollen zu vermischen."
+  ]
+}
