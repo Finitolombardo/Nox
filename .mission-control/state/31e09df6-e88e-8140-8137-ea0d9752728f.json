@@ -1,0 +1,25 @@
+{
+  "questId": "31e09df6-e88e-8140-8137-ea0d9752728f",
+  "status": "failed",
+  "attempts": 2,
+  "lockedAt": "2026-03-14T22:21:02.175Z",
+  "updatedAt": "2026-03-14T22:23:22.293Z",
+  "agentKey": "archon",
+  "agentName": "Archon",
+  "inputJsonPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-trading-agents-als-separates-produkt-konzipieren-31e09df6.json",
+  "inputMarkdownPath": "/home/agentadmin/.openclaw/workspace/.mission-control/dispatch/quest-trading-agents-als-separates-produkt-konzipieren-31e09df6.md",
+  "runId": "quest-worker-31e09df6-mmqw6p4n",
+  "lastError": "agent_timeout",
+  "report": {
+    "ok": true,
+    "artifact": {
+      "ok": true,
+      "id": "32309df6-e88e-81cf-87ca-fe567d593624",
+      "url": "https://www.notion.so/quest-trading-agents-als-separates-produkt-konzipieren-31e09df6-md-32309df6e88e81cf87cafe567d593624"
+    },
+    "run": {
+      "ok": true,
+      "id": "32309df6-e88e-8183-8341-d6a8191f490f"
+    }
+  }
+}
