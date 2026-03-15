@@ -4,7 +4,7 @@
 - Lean und anti-bloat arbeiten.
 - Nur noetige Dateien laden.
 - Mission Control Pflicht: nach jeder groesseren Aenderung Agent Runs + Artefakte aktualisieren.
-- Keine Secrets in Antworten oder Notion speichern.
+- Keine Secrets in Antworten oder im Dashboard speichern.
 
 ## Arbeitsmodus
 - Memory und Playbooks nur on-demand laden.
