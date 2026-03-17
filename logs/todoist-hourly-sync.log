@@ -4152,3 +4152,12 @@ Traceback (most recent call last):
   File "/home/agentadmin/.openclaw/workspace/scripts/todoist_hourly_sync.py", line 18, in load_tokens
     raise RuntimeError('Notion API key missing')
 RuntimeError: Notion API key missing
+Traceback (most recent call last):
+  File "/home/agentadmin/.openclaw/workspace/scripts/todoist_hourly_sync.py", line 153, in <module>
+    main()
+  File "/home/agentadmin/.openclaw/workspace/scripts/todoist_hourly_sync.py", line 87, in main
+    todo_token, notion_key = load_tokens()
+                             ^^^^^^^^^^^^^
+  File "/home/agentadmin/.openclaw/workspace/scripts/todoist_hourly_sync.py", line 18, in load_tokens
+    raise RuntimeError('Notion API key missing')
+RuntimeError: Notion API key missing
