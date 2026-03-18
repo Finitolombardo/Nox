@@ -2,9 +2,10 @@
 
 ## Session Start
 1. User Operating Profile laden
-2. n8n_workflow_map laden
-3. TEAM_REGISTRY.json laden
-6. Mission-Control-Wahrheit setzen:
+2. QUEST_ROUTING.md laden **((KRITISCH - Quest-Fragen NUR über MC-API))**
+3. n8n_workflow_map laden
+4. TEAM_REGISTRY.json laden
+5. Mission-Control-Wahrheit setzen:
    - Status/Core/Workspace/Modelle/Provider: OpenClaw-Runtime + Workspace-Dateien
    - Memory: MCP
    - Quests, Agent Runs, Artifacts: Dashboard Quest Seite
