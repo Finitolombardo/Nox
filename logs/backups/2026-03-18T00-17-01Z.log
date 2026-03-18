@@ -1,1 +1,16 @@
 [2026-03-18T00:17:01Z] backup start
+[main 8462c56] Auto-backup snapshot 2026-03-18T00-17-01Z
+ 11 files changed, 95 insertions(+), 6 deletions(-)
+ rename DASHBOARD.md => .archive/quest-legacy/DASHBOARD.md (100%)
+ rename {questboard => .archive/quest-legacy}/quests.json (100%)
+ create mode 100644 QUEST_ROUTING.md
+ create mode 100644 logs/backups/2026-03-18T00-17-01Z.log
+ create mode 100644 logs/backups/workspace-backup-2026-03-17T23-17-01Z.tar.gz
+ create mode 100755 quest-reader.sh
+To https://github.com/Finitolombardo/Nox.git
+   22c55e7..8462c56  main -> main
+git push ok
+archive created: /home/agentadmin/.openclaw/workspace/logs/backups/workspace-backup-2026-03-18T00-17-01Z.tar.gz
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
+drive options: token source: get token for admin@alphamindhub.com: read token: aes.KeyUnwrap(): integrity check failed.
